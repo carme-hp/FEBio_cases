@@ -39,7 +39,7 @@ config = {
     }
   },
 
-  "PreciceAdapterVolumeCoupling": {
+  "PreciceAdapter": {
     "preciceConfigFilename":        variables.precice_config,
     "preciceParticipantName":       "Fibers",
     "couplingEnabled":              True,
@@ -48,7 +48,7 @@ config = {
     "scalingFactor":                1,
     "outputOnlyConvergedTimeSteps": True,
 
-    "preciceData": [
+    "preciceVolumeData": [
       {
         "mode":             "read",
         "preciceDataName":  "Geometry",
