@@ -12,7 +12,6 @@ How to build and run:
 ```
 cd fibers-opendihu
 mkorn && sr
-cd build_release
 ./build_release/fibers settings_fibers.py
 ``` 
 
@@ -24,7 +23,6 @@ How to build and run:
 ```
 cd mechanics-opendihu
 mkorn && sr
-cd build_release
 ./build_release/muscle settings_muscle.py
 ``` 
 
