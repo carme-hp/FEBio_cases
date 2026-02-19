@@ -45,7 +45,7 @@ config = {
     }
   },
 
-  "PreciceAdapterVolumeCoupling": {
+  "PreciceAdapter": {
     "preciceConfigFilename":        variables.precice_config,
     "preciceParticipantName":       "Muscle",
     "couplingEnabled":              True,
@@ -54,7 +54,7 @@ config = {
     "scalingFactor":                1,
     "outputOnlyConvergedTimeSteps": True,
 
-    "preciceData": [
+    "preciceVolumeData": [
       {
         "mode":             "write",
         "preciceDataName":  "Geometry",

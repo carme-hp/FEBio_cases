@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
   DihuContext settings(argc, argv);
   
   // define MuscleContractionSolver for 3D mechanics
-  Control::PreciceAdapterVolumeCoupling<
+  Control::PreciceAdapter<
     MuscleContractionSolver< 				
       Mesh::StructuredDeformableOfDimension<3>,
       Equation::SolidMechanics::TransverselyIsotropicMooneyRivlinIncompressibleActive3D

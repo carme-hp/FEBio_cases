@@ -8,7 +8,23 @@ The coupling configuration is defined in the `precice-config.xml`.
 Only available in OpenDiHu. 
 - [fibers-opendihu](fibers-opendihu)
 
+How to build and run: 
+```
+cd fibers-opendihu
+mkorn && sr
+cd build_release
+./fibers ../settings_fibers.py
+``` 
+
 ## The `mechanics` participant
 Available in OpenDiHu and FEBio
 - [mechanics-opendihu](mechanics-opendihu)
+
+How to build and run: 
+```
+cd mechanics-opendihu
+mkorn && sr
+cd build_release
+./muscle ../settings_muscle.py
+``` 
 - [mechanics-febio](mechanic-febio)
