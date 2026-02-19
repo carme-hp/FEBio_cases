@@ -1,4 +1,4 @@
-#include <precice/SolverInterface.hpp>
+#include <precice/precice.hpp>
 #include <FECore/sdk.h>
 #include <FECore/FECallBack.h>
 #include <FECore/Callback.h>
@@ -24,7 +24,7 @@ public:
     	std::pair<int, vector<double>> getRelevantMaterialPoints(FEModel *fem, const std::string &elementName);
 
 protected:
-    	precice::SolverInterface *precice = NULL;
+    	precice::Participant *precice = NULL;
     	int dimensions; 		// precice dimensions
     	double dt; 			// solver timestep size
     	double precice_dt; 		// precice timestep size 
@@ -33,8 +33,6 @@ protected:
     	std::vector<int> vertexIDs;	// vertex IDs of the muscle mesh
 
 	// Checkpoints used for implicit coupling
-    	const std::string &coric = precice::constants::actionReadIterationCheckpoint();
-    	const std::string &cowic = precice::constants::actionWriteIterationCheckpoint();
     	FEAnalysis *checkPointStep;
     	DumpMemStream dmp;
     	double checkpoint_time = 0;

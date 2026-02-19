@@ -38,8 +38,8 @@ void PreciceCallback::Init(FEModel *fem) {
 	}
 
     	// initialize precice
-    	this->precice = new precice::SolverInterface(PARTICIPANT_NAME, config, 0, 1);
-    	this->dimensions = this->precice->getDimensions();
+    	this->precice = new precice::Participant(PARTICIPANT_NAME, config, 0, 1);
+    	this->dimensions = this->precice->getMeshDimensions(MESH_NAME);
     	
     	// Get material point positions
     	FEMesh &femMesh = fem->GetMesh();
@@ -49,12 +49,10 @@ void PreciceCallback::Init(FEModel *fem) {
 
     	// Initialize precice mesh
     	this->vertexIDs.resize(this->numberOfVerticies);
-    	this->meshID = this->precice->getMeshID(MESH_NAME);
-    	this->precice->setMeshVertices(this->meshID, this->numberOfVerticies, vertexPositions.data(), this->vertexIDs.data());
+    	this->precice->setMeshVertices(MESH_NAME, vertexPositions, this->vertexIDs);
 
     	// Finish initializing precice
-    	this->precice_dt = precice->initialize();
-    	this->precice->initializeData();
+    	this->precice->initialize();
 
     	feLogInfo("Finished PreciceCallback::Init");
 }
@@ -65,7 +63,7 @@ bool PreciceCallback::Execute(FEModel &fem, int nreason) {
     	if (nreason == CB_INIT) {
     	    	this->Init(&fem);
     	} else if (nreason == CB_UPDATE_TIME) {
-    	    	if (this->precice->isActionRequired(this->cowic)) {
+    	    	if (this->precice->requiresWritingCheckpoint()) {
     	    	    	feLogInfo("CB_UPDATE_TIME - Saving Checkpoint\n");
     	    	    	// Save
     	    	    	// this uses dmp.open(true,true) which leads to the time controller not beeing serialized
@@ -80,7 +78,6 @@ bool PreciceCallback::Execute(FEModel &fem, int nreason) {
     	    	    	this->checkpoint_time = fem.GetTime().currentTime;
     	    	    	this->dmp.clear();
     	    	    	fem.Serialize(this->dmp);
-    	    	    	this->precice->markActionFulfilled(this->cowic);
     	    	}
     	    	// advance timestep
     	    	this->dt = min(this->precice_dt, fem.GetCurrentStep()->m_dt);
@@ -92,8 +89,8 @@ bool PreciceCallback::Execute(FEModel &fem, int nreason) {
     	    	    	// Read and write precice data
     	    	    	this->ReadData(&fem);
     	    	    	this->WriteData(&fem);
-    	    	    	this->precice_dt = this->precice->advance(this->dt);
-    	    	    	if (this->precice->isActionRequired(this->coric)) {
+    	    	    	this->precice->advance(this->dt);
+    	    	    	if (this->precice->requiresReadingCheckpoint()) {
     	    	    	    	feLogInfo("CB_MAJOR_ITERS - Restoring Checkpoint\n");
     	    	    	    	// Restore
     	    	    	    	// taken from FEAnalysis.cpp Line 475 ff
@@ -106,7 +103,6 @@ bool PreciceCallback::Execute(FEModel &fem, int nreason) {
     	    	    	    	fem.GetCurrentStep()->m_timeController = newTimeController;
     	    	    	    	fem.GetTime().currentTime = this->checkpoint_time;
     	    	    	    	fem.GetCurrentStep()->m_ntimesteps--; // Decrease number of steps because it gets increased right after this
-    	    	    	    	this->precice->markActionFulfilled(this->coric);
     	    	    	}
     	    	}
     	} else if (nreason == CB_SOLVED) {
@@ -119,13 +115,11 @@ bool PreciceCallback::Execute(FEModel &fem, int nreason) {
 
 // Read Data from precice to febio
 void PreciceCallback::ReadData(FEModel *fem) {
-    	if (this->precice->isReadDataAvailable()) {
     		feLogInfo("PreciceCallback::ReadData");
 
     	    	// Read data from precice
     	    	std::vector<double> data(this->numberOfVerticies);
-    	    	const int dataID = this->precice->getDataID(READ_DATA, this->meshID); 
-    	    	precice->readBlockScalarData(dataID, this->numberOfVerticies, this->vertexIDs.data(), data.data());
+    	    	precice->readData(MESH_NAME, READ_DATA, this->vertexIDs, this->dt, data);
 
     	    	// Write data to febio
     	    	int counter = 0;
@@ -143,12 +137,11 @@ void PreciceCallback::ReadData(FEModel *fem) {
     	    	    	}
     	    	}
     		feLogInfo("Finished PreciceCallback::ReadData");
-    	}
+    	
 }
 
 // Write data from precice to febio
 void PreciceCallback::WriteData(FEModel *fem) {
-    if (precice->isWriteDataRequired(dt)) {
     	feLogInfo("PreciceCallback::WriteData");
 
 	// Read data from febio
@@ -168,8 +161,7 @@ void PreciceCallback::WriteData(FEModel *fem) {
         }
 
 	// Write data to precice
-	const int dataID = this->precice->getDataID(WRITE_DATA, this->meshID); 
-        this->precice->writeBlockVectorData(dataID, this->numberOfVerticies, this->vertexIDs.data(), data.data());
+        this->precice->writeData(MESH_NAME, WRITE_DATA, this->vertexIDs, data);
     	feLogInfo("Finished PreciceCallback::WriteData");
     }
-}
+
