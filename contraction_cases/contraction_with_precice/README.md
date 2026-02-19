@@ -13,7 +13,7 @@ How to build and run:
 cd fibers-opendihu
 mkorn && sr
 cd build_release
-./fibers ../settings_fibers.py
+./build_release/fibers settings_fibers.py
 ``` 
 
 ## The `mechanics` participant
@@ -25,6 +25,13 @@ How to build and run:
 cd mechanics-opendihu
 mkorn && sr
 cd build_release
-./muscle ../settings_muscle.py
+./build_release/muscle settings_muscle.py
 ``` 
+
 - [mechanics-febio](mechanic-febio)
+
+How to run:
+```
+cd mechanics-febio
+BFP_CONFIG="../precice-config.xml" ./run.sh muscle.feb
+```

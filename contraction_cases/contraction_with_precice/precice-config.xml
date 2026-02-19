@@ -48,7 +48,7 @@
     <export:vtk directory="../precice-output" every-n-time-windows="1"/>
   </participant>
 
-  <m2n:sockets acceptor="Fibers" connector="Muscle" exchange-directory="../.."/>
+  <m2n:sockets acceptor="Fibers" connector="Muscle" exchange-directory=".."/>
 
   <coupling-scheme:serial-explicit>
     <participants first="Fibers" second="Muscle" />

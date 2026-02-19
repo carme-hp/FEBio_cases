@@ -6,7 +6,7 @@ rank_no = int(sys.argv[-2])
 n_ranks = int(sys.argv[-1])
 
 # PreCICE
-precice_config = "../../precice-config.xml"
+precice_config = "../precice-config.xml"
 
 # Time stepping
 dt_3D = 1e-1            # time step of 3D mechanics
