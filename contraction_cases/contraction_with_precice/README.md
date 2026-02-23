@@ -8,7 +8,8 @@ The coupling configuration is defined in the `precice-config.xml`.
 Only available in OpenDiHu. 
 - [fibers-opendihu](fibers-opendihu)
 
-How to build and run: 
+Install OpenDiHu and define `$OPENDIHU_HOME` and aliases `mkorn='$OPENDIHU_HOME/scripts/shortcuts/mkorn.sh'` and `sr='$OPENDIHU_HOME/scripts/shortcuts/sr.sh'`. Then you can build and run as follows:
+
 ```
 cd fibers-opendihu
 mkorn && sr
@@ -19,7 +20,8 @@ mkorn && sr
 Available in OpenDiHu and FEBio
 - [mechanics-opendihu](mechanics-opendihu)
 
-How to build and run: 
+Install OpenDiHu and define `$OPENDIHU_HOME` and aliases `mkorn='$OPENDIHU_HOME/scripts/shortcuts/mkorn.sh'` and `sr='$OPENDIHU_HOME/scripts/shortcuts/sr.sh'`. Then you can build and run as follows:
+
 ```
 cd mechanics-opendihu
 mkorn && sr
@@ -27,6 +29,8 @@ mkorn && sr
 ``` 
 
 - [mechanics-febio](mechanic-febio)
+
+Install FEBio and the FEBio adapter. See [https://github.com/carme-hp/FEBio_adapter/tree/main/bfp_plugin](instructions).
 
 How to run:
 ```
