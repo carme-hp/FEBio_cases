@@ -21,8 +21,8 @@ config = {
   "scenarioName":                   scenario_name,
 
   "logFormat":                      "csv",
-  "mappingsBetweenMeshesLogFile":   "out/" + scenario_name + "/fibers_mappings_between_meshes_log.txt",
-  "solverStructureDiagramFile":     "out/" + scenario_name + "/fibers_solver_structure_diagram.txt",
+  "mappingsBetweenMeshesLogFile":   "../results-opendihu-fibers/" + "fibers_mappings_between_meshes_log.txt",
+  "solverStructureDiagramFile":     "../results-opendihu-fibers/" + "fibers_solver_structure_diagram.txt",
   
   "Meshes":                         variables.meshes,
   "MappingsBetweenMeshes":          {},
@@ -44,7 +44,7 @@ config = {
     "preciceParticipantName":       "Fibers",
     "couplingEnabled":              True,
     "timeStepOutputInterval":       100,
-    "timestepWidth":                1,
+    "timestepWidth":                variables.dt_3D,
     "scalingFactor":                1,
     "outputOnlyConvergedTimeSteps": True,
 
@@ -107,7 +107,7 @@ config = {
                   "CellML": {
                     "modelFilename":            variables.input_dir + "hodgkin_huxley-razumova.cellml",
                     "meshName":                 "fiber{}".format(variables.get_fiber_no(fiber_x, fiber_y)),
-                    "stimulationLogFilename":   "out/" + scenario_name + "/fibers_stimulation.log",
+                    "stimulationLogFilename":   "../results-opendihu-fibers/"+ "fibers_stimulation.log",
 
                     "statesInitialValues":                          [],
                     "initializeStatesToEquilibrium":                False,
@@ -150,7 +150,7 @@ config = {
                 {
                   "format":         "Paraview",
                   "outputInterval": int(1.0 / variables.dt_splitting * variables.output_interval),
-                  "filename":       "out/" + scenario_name + "/fibers",
+                  "filename":       "../results-opendihu-fibers/" + "fibers",
                   "fileNumbering":  "incremental",
                   "binary":         True,
                   "fixedFormat":    False,
