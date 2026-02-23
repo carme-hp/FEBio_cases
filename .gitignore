@@ -103,11 +103,16 @@ celerybeat.pid
 
 .sconsign.dblite
 .sconf_temp
+.scons_node_count
 **/build_release/**
 **/build_debug/**
+**/src/*.c
+**/logs/**
+**/results*/**
 **precice-Participant**
 **precice-output**
 **precice-run**
+**precice-profiling**
 **.xplt
 **.vtk
 **.vtu
