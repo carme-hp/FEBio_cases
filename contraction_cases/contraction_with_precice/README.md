@@ -35,5 +35,5 @@ Install FEBio and the FEBio adapter. See [https://github.com/carme-hp/FEBio_adap
 How to run:
 ```
 cd mechanics-febio
-BFP_CONFIG="../precice-config.xml" ./run.sh muscle.feb
+./run.sh muscle.feb
 ```
