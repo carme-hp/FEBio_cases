@@ -1,11 +1,12 @@
-# Bachelor-Forschungsprojekt: Comparison and coupling of the neuromuscular simulation software OpenDiHu with the biomechanics solver FEBio
+# Simulating muscle contraction with FEBio
 
-This is the repository for the Bachelor-Forschungsprojekt of Paul Arlt, Luis Morgenstern, Silas Natterer and Jan Stein. It encompasses all the code and documentation related to our research project on modeling skeletal muscles using the FEBio and OpenDiHu simulation frameworks. For a more detailed description of the project and its results, we refer to [our report](report.pdf).
+This repository provides simulation examples for the [FEBio adapter](https://github.com/carme-hp/FEBio_adapter/tree/main), an adapter to couple FEBio and [OpenDiHu](https://github.com/opendihu/opendihu) via preCICE to run simulations of skeletal muscles.
 
-We've organized the repository into several folders, each representing a distinct aspect of our project:
+### Structure
 
-- [bfp_plugin](bfp_plugin): In this folder, you'll find the code for our custom FEBio plugin, originally forked from <https://github.com/precice/febio-adapter>. This adapter enables the coupling of FEBio and OpenDiHu through the library preCICE.
+- [partitioned-muscle-contraction](partitioned-muscle-contraction): Provides the input files and instructions to run a coupled fibers-mechanics simulation with preCICE.
 
-- [comparison_opendihu_febio](comparison_opendihu_febio): This folder encompasses the simulation cases associated with the comparative analysis of the mechanical simulation capabilities between OpenDiHu and FEBio.
+- [monolithic-muscle-contraction](monolithic-muscle-contraction): Provides the input files and instructions to run a monolithic fibers-mechanics simulation using OpenDiHu. This is meant to be used for comparison purposes.
 
-- [active_contraction_cases](active_contraction_cases): This folder is dedicated to the simulation of active fiber contractions in OpenDiHu with and without preCICE. This also contains the main result of our project: A hybrid simulation, combining the mechanical solver of FEBio with the fast monodomain solver of OpenDiHu.
+- [monolithic-muscle-elongation](monolithic-muscle-elongation): Provides the input files and instructions to run a mechanics simulation with OpenDiHu and FEBio. It involves no coupling, but it might be useful for comparison. 
+
