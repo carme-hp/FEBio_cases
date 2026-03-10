@@ -37,3 +37,31 @@ How to run:
 cd mechanics-febio
 ./run.sh muscle.feb
 ```
+
+# Mesh files
+
+Choosing a valid mesh combination is key for a successful simulation. 
+
+## Fiber Mesh
+OpenDiHu can parse the fibers from a `.json` file with the following structure:
+```JSON
+{
+  "fiber0": [{"x":..., "y":..., "z":...}, ...],
+  "fiber1": [{"x":..., "y":..., "z":...}, ...]
+}
+```
+`.json` files can be generated from imaging data using the software [BioMesh](https://github.com/opendihu/biomesh) or artificially in case of dummy geometries. 
+
+**Helper Scripts**
+
+- The script `check_fiber_mesh.py` is provided so you can visualize the fiber mesh in ParaView without having to run the simulation. For that, you will need to use the `Filters → Tube`.
+
+
+    ```
+    python check_fiber_mesh.py fiber_file_name.json 
+    ```
+
+- The script `count_fibers_points.py` can be run to quickly find out the number of fibers and their number of points. 
+    ```
+    python count_fibers_points.py fiber_file_name.json 
+    ```
