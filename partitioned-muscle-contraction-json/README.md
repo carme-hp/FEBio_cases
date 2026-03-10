@@ -38,30 +38,11 @@ cd mechanics-febio
 ./run.sh muscle.feb
 ```
 
-# Mesh files
+# Mesh Generation
 
-Choosing a valid mesh combination is key for a successful simulation. 
+To run a successful simulation for a given geometry, you have to generate the corresonding mesh files that satisfy the input requirements. 
 
-## Fiber Mesh
-OpenDiHu can parse the fibers from a `.json` file with the following structure:
-```JSON
-{
-  "fiber0": [{"x":..., "y":..., "z":...}, ...],
-  "fiber1": [{"x":..., "y":..., "z":...}, ...]
-}
-```
-`.json` files can be generated from imaging data using the software [BioMesh](https://github.com/opendihu/biomesh) or artificially in case of dummy geometries. 
+- The **fiber mesh** for OpenDiHu is encoded in a `.json` file. Refer to the [instructions for generation of fiber mesh](FibersMeshGeneration) to create your own mesh files or to visualize the provided `.json` files.
 
-**Helper Scripts**
+- The requirements on the **mechanics mesh** are different depending on the solver of choice, e.g., OpenDiHu or FEBio. To learn more about the requirements and how to generate mechanics meshes, refer to the [instructions for generation of mechanics mesh](MechanicsMeshGeneration). 
 
-- The script `check_fiber_mesh.py` is provided so you can visualize the fiber mesh in ParaView without having to run the simulation. For that, you will need to use the `Filters → Tube`.
-
-
-    ```
-    python check_fiber_mesh.py fiber_file_name.json 
-    ```
-
-- The script `count_fibers_points.py` can be run to quickly find out the number of fibers and their number of points. 
-    ```
-    python count_fibers_points.py fiber_file_name.json 
-    ```

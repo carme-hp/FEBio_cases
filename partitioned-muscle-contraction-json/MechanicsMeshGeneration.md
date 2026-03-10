@@ -1,16 +1,4 @@
-# Coupled fibers-mechanics simulation with preCICE
-
-This is the same case as in the original `partitioned-muscle-contraction`, except for the geometry.
-
-Here we use more complex geometries, e.g. we test ellipsoid geometries and a real image-based geometry of the Tibialis Anterior.
-
-## Fiber Mesh Generation
-
-The fibers mesh is defined via a `.json` file, which requires changes in `variables/variables.py` and in `settings_fibers.py`.
-
-The creation of the provided `.json` can be reproduced using [our pipeline](https://github.com/carme-hp/muscle_prestretch_dataset/tree/main).
-
-## Mechanics Mesh Generation
+# Mechanics Mesh Generation
 
 The requirements on the mechanics mesh depend on our solver of choice. 
 - OpenDiHu requires an hexahedral structural mesh. Non-cubic meshes are provided via an input `.vtk` file. 
@@ -30,14 +18,15 @@ The requirements on the mechanics mesh depend on our solver of choice.
     > TetGen: Generates "tet4" elements (or higher order tet elements). It requires a closed surface and returns errors otherwise. 
     > 
     > Example: For mesh dimensions of 6 x 6 x 14, an element size of 5 creates 1040 tet4 elements. For TA, size of 5 created 196956 elements.
+    
 4. File → Export FE model
 
 ### Fixing the `.stl` file
 
 1. Install `MeshLab` (version 2020.09)
-```
-sudo apt-get install meshlab
-```
+    ```
+    sudo apt-get install meshlab
+    ```
 2. Open `Meshlab`. File → Import Mesh → choose `.stl` file
 3. Check mesh: Filters → Quality Measures and Computations → Compute Geometric Measure
 4. If _Mesh is not 'watertight'_, then: Filters → Remeshing, Simplification and Reconstruction → Surface Reconstruction: Screened Poisson
