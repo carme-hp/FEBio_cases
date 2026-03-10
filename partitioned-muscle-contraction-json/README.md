@@ -42,7 +42,7 @@ cd mechanics-febio
 
 To run a successful simulation for a given geometry, you have to generate the corresonding mesh files that satisfy the input requirements. 
 
-- The **fiber mesh** for OpenDiHu is encoded in a `.json` file. Refer to the [instructions for generation of fiber mesh](FibersMeshGeneration) to create your own mesh files or to visualize the provided `.json` files.
+- The **fiber mesh** for OpenDiHu is encoded in a `.json` file. Refer to the [instructions for generation of fiber mesh](FibersMeshGeneration.md) to create your own mesh files or to visualize the provided `.json` files.
 
-- The requirements on the **mechanics mesh** are different depending on the solver of choice, e.g., OpenDiHu or FEBio. To learn more about the requirements and how to generate mechanics meshes, refer to the [instructions for generation of mechanics mesh](MechanicsMeshGeneration). 
+- The requirements on the **mechanics mesh** are different depending on the solver of choice, e.g., OpenDiHu or FEBio. To learn more about the requirements and how to generate mechanics meshes, refer to the [instructions for generation of mechanics mesh](MechanicsMeshGeneration.md). 
 
