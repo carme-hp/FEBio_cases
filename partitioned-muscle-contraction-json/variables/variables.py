@@ -43,7 +43,7 @@ meshes = { # create 3D mechanics mesh
 }
 
 
-fiber_file = "fibers_1.json"
+fiber_file = "muscle1_fibers.json"
 with open(fiber_file,"r") as f:
 	fdata = json.load(f)
     
