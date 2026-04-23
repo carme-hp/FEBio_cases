@@ -2,7 +2,7 @@
 <febio_spec version="4.0">
 	<Module type="solid"/>
 	<Code>
-		<callback name="precice_callback"/>
+		<callback name="preCICEAdapter"/>
 	</Code>
 	<Control>
 		<analysis>DYNAMIC</analysis>
