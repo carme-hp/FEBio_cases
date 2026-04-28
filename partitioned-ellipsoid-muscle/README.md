@@ -1,14 +1,8 @@
-# Coupled fibers-mechanics simulation with preCICE
+# Coupled fibers-mechanics of an ellipsoid muscle
 
-In this simulation we couple a `fiber` participant with a `mechanics` participant. This is a volume coupling example, where values are exchange accross the whole domain of both participants.
+## How to run
 
-The coupling configuration is defined in the `precice-config.xml`. 
-
-## The `fiber` participant
-Only available in OpenDiHu. 
-- [fibers-opendihu](fibers-opendihu)
-
-Install OpenDiHu and define `$OPENDIHU_HOME` and aliases `mkorn='$OPENDIHU_HOME/scripts/shortcuts/mkorn.sh'` and `sr='$OPENDIHU_HOME/scripts/shortcuts/sr.sh'`. Then you can build and run as follows:
+- The fiber participant (OpenDiHu)
 
 ```
 cd fibers-opendihu
@@ -16,11 +10,7 @@ mkorn && sr
 ./build_release/fibers settings_fibers.py
 ``` 
 
-## The `mechanics` participant
-Available in OpenDiHu and FEBio
-- [mechanics-opendihu](mechanics-opendihu)
-
-Install OpenDiHu and define `$OPENDIHU_HOME` and aliases `mkorn='$OPENDIHU_HOME/scripts/shortcuts/mkorn.sh'` and `sr='$OPENDIHU_HOME/scripts/shortcuts/sr.sh'`. Then you can build and run as follows:
+- The mechanics participant (0ption 1: OpenDiHu)
 
 ```
 cd mechanics-opendihu
@@ -28,25 +18,16 @@ mkorn && sr
 ./build_release/muscle settings_muscle.py
 ``` 
 
-- [mechanics-febio](mechanic-febio)
+- The mechanics participant (Option 2: OpenDiHu)
 
-Install FEBio and the FEBio adapter. See [https://github.com/carme-hp/FEBio_adapter/tree/main/bfp_plugin](instructions).
-
-How to run:
 ```
 cd mechanics-febio
-./run.sh muscle.feb
+./run.sh ellipsoid-muscle.feb
 ```
 
-# Mesh Generation
+# Muscle geometry
 
-To run a successful simulation for a given geometry, you have to generate the corresonding mesh files that satisfy the input requirements. 
-
-- The **fiber mesh** for OpenDiHu is encoded in a `.json` file. Refer to the [instructions for generation of fiber mesh](FibersMeshGeneration.md) to create your own mesh files or to visualize the provided `.json` files.
-
-- The requirements on the **mechanics mesh** are different depending on the solver of choice, e.g., OpenDiHu or FEBio. To learn more about the requirements and how to generate mechanics meshes, refer to the [instructions for generation of mechanics mesh](MechanicsMeshGeneration.md). 
-
-# About the geometry
+The geometry is an ellipsoid like muscle with length 14 cm and a radius of 3cm at the center. 
 
 The geometry is defined by
 
@@ -68,3 +49,7 @@ Rmin = 2
 ```
 
 To parse the `3D_mesh_1.vtk` the script `read_structured_vtk.py` from our repository is provided.
+
+## Mapping configuration
+
+Todo

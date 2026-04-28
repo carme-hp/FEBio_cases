@@ -1,89 +1,87 @@
-# Replication data for section "Compositional coupling"
+# Coupled fibers-mechanics of an ellipsoid muscle
 
-This directory contains the setup files and instructions to reproduce the experiments from section "Compositional coupling" of Homs-Pons et al. "Partitioned Multiphysics Simulation of an Electrophysiological Three-Tendon-Biceps Model". In addition, we provide the results of the simulation.
+## How to run
 
-## 1. Data set structure
+- The fiber participant (OpenDiHu)
 
-This dataset contains
-
-- A `src/` folder with the muscle and tendon participants solvers
-- A `SConscript` and `SConstruct` files, used to compile the executables using `scons`
-- Setting files, one for each participant
-    - muscle mechanics
-    - muscle fibers
-    - bottom tendon
-    - top-a tendon
-    - top-b tendon
-- A `helper.py`, and `variables/` folder, which complement the settings file
-- The precice_configuration file `precice_config.xml`
-- A `start_all.sh` script to start the simulation of the four participants
-- A `results/` folder with the results of the simulaton
-- A `profiling.json` file with the performance results
-
-## 2. Requirements
-
-### 2.1 Software
-To replicate the multi coupling experiment it is necessary to install OpenDiHu and preCICE. In the root README.md of this repository you can find instructions on how to build and install the software packages. 
-
-### 2.2 Input files
-Additional [input files](https://zenodo.org/records/4705982) are required to run the experiment. The input files contain the geometry and material models. 
- 
-Download **input.tgz** and extract files. Run `export OPENDIHU_INPUT=/path/to/input`.
-
-# 3. Running the experiments
-
-## 3.1 Building the solvers
-
-OpenDiHu uses scons to build the executables. The easiest way to build the solvers is by adding the following shortcuts:
-
-```bash
-alias sr='$OPENDIHU_HOME/scripts/shortcuts/sr.sh'
-alias mkorn='$OPENDIHU_HOME/scripts/shortcuts/mkorn.sh'
 ```
-
-Then you can build the executables by simply running `mkorn && sr` in the current directory. This will create a `build_release/` executables with the executables. 
-
-
-## 3.2 Executing the experiments
-
-We provide a script which starts all four participants from the current directory. Thus you can just run
-
-```bash
-. start_all.sh
-```
-
-Alternatively you can execute each participant manually. For example you can start the muscle participant as follows
-
-```bash
+mkorn && sr
 cd build_release
-rm -r precice-run
-mpirun -n 1 ./muscle_mechanics ../settings_muscle_mechanics.py ramp.py --case_name "ramp"
+./muscle_fibers ../fibers settings__muscle_fibers.py ramp.py
+``` 
+
+- The mechanics participant (0ption 1: OpenDiHu)
+
+```
+mkorn && sr
+cd build_release
+./muscle_contraction ../settings_muscle_mechanics.py ramp.py
+``` 
+
+- The mechanics participant (Option 2: OpenDiHu)
+
+```
+cd mechanics-febio
+./run.sh biceps.feb
 ```
 
-The other participants can be started similarly. All participants are executed in serial except for the muscle fibers, which were executed using 16 mpi ranks. Refer to `start_all.sh` for the details. 
+There are multiple input files available for FEBio, but they all describe the same geometry. 
+`biceps.feb` has the finest mesh of all, while `biceps-coarse.feb` and `biceps-smooth.feb` have a similar resolution but in the second the mesh quality has been further improved. 
 
-## 3.3 Visualizing the results
-We look at the results of the simulation using paraView. The results are located at the directory `build_release/out/ramp/`. You can change the name of the output directory modifying the input for `--case_name` in `start_all.sh`.
 
-## 3.4 Analyzing performance
 
-The `profiling.json` includes the performance results for a simulation of 10 ms. To analyze performance we used the [performance analysis tool from preCICE](https://precice.org/tooling-performance-analysis.html#configuration). 
+# Muscle geometry
 
-You can analyze each participant separately. E.g., for the muscle mechanics participant run
+Todo
+
+## Mapping configuration
+
+Todo
+
+## FEBio simulations limitations
+
+The FEbio simulation of the biceps does not converge already at the first timestep. This happens for all three tested meshes. The solution was to change the material parameters.
+
+- material parameters designed to mimic OpenDiHu mechanics 
+
 ```
-precice-profiling analyze MuscleMechanics
+<material id="1" name="Material2" type="DiHuMaterial">
+    <density>10</density>
+    <k>1000</k>
+    <pressure_model>default</pressure_model>
+    <c1>3.176e-10</c1>
+    <c2>1.813</c2>
+    <c3>0</c3>
+    <c4>1</c4>
+    <c5>0.01075</c5>
+    <lam_max>1</lam_max>
+    <fiber type="vector">
+        <vector>0,0,1</vector>
+    </fiber>
+    <active_contraction type="DiHuContraction">
+        <pmax>7.3</pmax>
+        <lam_opt>1.2</lam_opt>
+        <enable_force_length_relation>1</enable_force_length_relation>
+    </active_contraction>
+</material>
 ```
-The time spent in the solver is given by `solver.advance`.
 
-You can also generate the `profiling.json` yourself. For that you need to run the experiments. This will create a `precice-profiling` folder, which contains the information for each participant. If you run
-```
-precice-profiling merge
+- material parameters extracted from an febio-only contraction
+
 ```  
-
-then you will obtain the `profiling.json` file. 
-
-The provided `profiling.json` corresponds to a simulation of 10 ms. So to obtain the exact same results, you have to change the simulation end time in `precice_config.xml`. 
-```    
-<max-time value="10.0"/>                     
-
+<material id="1" name="Material2" type="DiHuMaterial">
+    <c1>13.85</c1>
+    <c2>0.0</c2>
+    <c3>2.07</c3>
+    <c4>61.44</c4>
+    <c5>640.7</c5>
+    <k>100.0</k>
+    <lam_max>1.03</lam_max>
+    <fiber type="vector">0,0,1</fiber>
+    <active_contraction type="DiHuContraction">
+        <pmax>7.3</pmax>
+        <lam_opt>1.2</lam_opt>
+        <enable_force_length_relation>1</enable_force_length_relation>
+    </active_contraction>
+</material>
 ```
