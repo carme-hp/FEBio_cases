@@ -2,6 +2,7 @@ import json
 import sys
 import itertools
 import numpy as np
+import read_structured_vtk
 
 rank_no = int(sys.argv[-2])
 n_ranks = int(sys.argv[-1])
@@ -28,22 +29,28 @@ ex_x, ex_y, ex_z = 3.0, 3.0, 12.0               # extent of muscle
 el_x, el_y, el_z = 3, 3, 12                     # number of elements
 bs_x, bs_y, bs_z = 2*el_x+1, 2*el_y+1, 2*el_z+1 # quadratic basis functions
 
-fb_points = 100             # number of points per fiber
-fiber_direction = [0, 0, 1] # direction of fiber in element
+# -------------------------------------------------------------------
+# FEM mesh generation from .vts file
+# -------------------------------------------------------------------
+vtk_filename = "../3D_mesh_1.vtk"
+points, bs_x, bs_y, bs_z = read_structured_vtk.read_structured_vtk(vtk_filename)
+el_x, el_y, el_z = int((bs_x-1)/2), int((bs_y-1)/2), int((bs_z-1)/2)
 
 meshes = { # create 3D mechanics mesh
     "mesh3D": {
         "nElements":            [el_x, el_y, el_z],
-        "physicalExtent":       [ex_x, ex_y, ex_z],
-        "physicalOffset":       [0, 0, 0],
+        "nodePositions":        points,
         "logKey":               "mesh3D",
         "inputMeshIsGlobal":    True,
-        "nRanks":               n_ranks
+        "nRanks":               1,
     }
 }
 
+# -------------------------------------------------------------------
+# fiber mesh generation from .json file
+# -------------------------------------------------------------------
 
-fiber_file = "muscle1_fibers.json"
+fiber_file = "../fibers_1.json"
 with open(fiber_file,"r") as f:
 	fdata = json.load(f)
     
@@ -65,6 +72,10 @@ for fiber in fdata:
      
 n_fibers = fiber_idx
 
+# -------------------------------------------------------------------
+# Boundary Conditions
+# -------------------------------------------------------------------
+
 # Boundary conditions
 dirichlet_bc = {} # fix z=0 with dirichlet boundary conditions
 for x in range(bs_x):
@@ -81,7 +92,10 @@ for x in range(el_x):
             "face": "2+"
         }]
 
-# Fiber activation
+# -------------------------------------------------------------------
+# Electrophysiology
+# -------------------------------------------------------------------
+ 
 import os
 input_dir = os.path.join(os.environ.get('OPENDIHU_HOME', '../../../../../'), "examples/electrophysiology/input/")
 
@@ -91,4 +105,4 @@ firing_times_file = input_dir + "MU_firing_times_always.txt"
 specific_states_call_enable_begin = 1.0                     # time of first fiber activation
 specific_states_call_frequency = 1e-3                       # frequency of fiber activation
 
-
+fiber_direction = [0, 0, 1]

@@ -46,3 +46,25 @@ To run a successful simulation for a given geometry, you have to generate the co
 
 - The requirements on the **mechanics mesh** are different depending on the solver of choice, e.g., OpenDiHu or FEBio. To learn more about the requirements and how to generate mechanics meshes, refer to the [instructions for generation of mechanics mesh](MechanicsMeshGeneration.md). 
 
+# About the geometry
+
+The geometry is defined by
+
+- `fibers_1.json` 
+- `3D_mesh_1.vtk`
+
+
+These geometry files were was generated using the geometry generation pipeline available on [our repository](https://github.com/carme-hp/muscle_prestretch_dataset/tree/main). To reproduce, use the following parameters:
+
+```
+id = 1
+n_fibers = 40
+nx = 5
+ny = 5
+nz = 21
+L = 14
+Rmax = 3
+Rmin = 2
+```
+
+To parse the `3D_mesh_1.vtk` the script `read_structured_vtk.py` from our repository is provided.
