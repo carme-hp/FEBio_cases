@@ -66,7 +66,7 @@ The FEbio simulation of the biceps does not converge already at the first timest
 </material>
 ```
 
-- material parameters extracted from an febio-only contraction
+- material parameters extracted from an febio-only contraction (see `biceps-smooth2.feb`)
 
 ```  
 <material id="1" name="Material2" type="DiHuMaterial">
