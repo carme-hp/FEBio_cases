@@ -65,6 +65,6 @@ To parse the `3D_mesh_1.vtk` the script `read_structured_vtk.py` from our reposi
 
 In the cases where there is no contraction, the fiber mesh in the openDihu solver looks like the 3D mesh. Despite looking like the 3D mesh, the fiber mesh still has 4040 points, and not 633 like the mechanics mesh. Multiple points (3-6) have the exact same coordinates.
 
-![alt text](image.png)
+![alt text](pics/broken_mapping.png)
 
 The fiber simulation goes through despite the wrong mesh and nans everywhere. 
