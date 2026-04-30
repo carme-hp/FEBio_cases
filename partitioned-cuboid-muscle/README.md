@@ -31,4 +31,12 @@ A cuboid with size 3 x 3 x 12 cm.
 
 ## Mapping configuration
 
-Todo
+|  | **geometry (from muscle to fibers)** | **gamma (from fibers to muscle)** | Observations |
+| --- | --- | --- | --- |
+| **results1** | nearest-neighbour | nearest-neighbour | no contraction, fiber mesh looks wrong |
+| **results2** | rbf (100, 0.2, 3) | nearest-neighbour | contracts |
+
+
+![alt text](pics/mesh_comparison.png)
+
+on the left (fiber mesh looks as expected - results2) vs on the right (fiber mesh looks like the mechanics mesh)
