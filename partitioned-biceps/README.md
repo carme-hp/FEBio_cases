@@ -32,7 +32,13 @@ There are multiple input files available for FEBio, but they all describe the sa
 
 # Muscle geometry
 
-Todo
+The biceps geometry is based on imaging data of the Visible Human Male dataset (*V. Spitzer et al. “The Visible Human Male: A Technical Report”. In: J. Am. Med. Inf. Assoc. 3.2 (1996)*). 
+
+The exact geometry files for the OpenDiHu participants are stored in the dataset [*Input data for OpenDiHu simulations*](https://doi.org/10.5281/zenodo.4705982), and information on the post-processing tecniques used for their creation can be found on the article *B. Maier and M. Schulte. “Mesh generation and multi-scale simulation of a contracting muscle–tendon complex”. In: J. Comput. Sci. Technol. 59 (2022)*.
+
+For the FEBio simulation, we generated the mechanics mesh from the `.stl` file in the dataset and applied FEBioStudio 2.10's `tet4`. We used Blender to pre-process the `.stl` before applying FEBioStudio's meshing tool. 
+
+Unlike the other cases, where the bottom end of the muscle (`z=0`) is fixed, here we apply the dirichlet boundary condition on the top level. 
 
 ## Mapping configuration
 
