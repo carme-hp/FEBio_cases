@@ -4,7 +4,8 @@ This repository provides simulation examples for the [FEBio adapter](https://git
 
 ## List of partitioned cases
 
-Coupled simulations for muscle contractions. We couple the electrophysiology (fibers participant) to the mechanics (muscle participant). The fiber participant is only available in OpenDiHu while the muscle participant is available both in OpenDiHu and in FEBio.
+We simulate muscle contraction using a partitioned approach. We couple the electrophysiology (fibers participant) to the mechanics (muscle participant). The fiber participant is only available in OpenDiHu while the muscle participant is available both in OpenDiHu and in FEBio. We test our approach on multiple scenarios, all of them consisting of a muscle that contracts along the z-axis. One of the muscle ends (z=0) is fixed while the other is free to move.
+
 
 - [partitioned-cuboid-muscle](partitioned-cuboid-muscle): Contraction of a cuboid muscle. Geometry is manually defined in OpenDiHu. Mechanics are implemented in OpenDiHu and in FEBio (both structured grid). 
 

@@ -37,6 +37,7 @@ A cuboid with size 3 x 3 x 12 cm.
 | **results2** | rbf (100, 0.2, 3) | nearest-neighbour | contracts |
 | **results3** | nearest-neighbour (muscle: 1st) | nearest-neighbour | no contraction, fiber mesh looks wrong  |
 | **results4** | nearest-neighbour (conservative) | nearest-neighbour | no contraction, fiber mesh looks wrong  |
+
 ![alt text](pics/mesh_comparison.png)
 
 on the left (fiber mesh looks as expected - results2) vs on the right (fiber mesh looks like the mechanics mesh)
