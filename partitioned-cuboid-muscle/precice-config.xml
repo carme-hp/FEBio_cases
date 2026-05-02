@@ -27,10 +27,10 @@
     <read-data name="Geometry" mesh="FibersMesh"/>
     <write-data name="Gamma" mesh="FibersMesh"/>
 
-    <!-- <mapping:rbf-pum-direct project-to-input="false" vertices-per-cluster="100" relative-overlap="0.2" constraint="consistent" direction="read" from="MuscleMesh" to="FibersMesh" >
+    <mapping:rbf-pum-direct project-to-input="false" vertices-per-cluster="100" relative-overlap="0.2" constraint="consistent" direction="read" from="MuscleMesh" to="FibersMesh" >
       <basis-function:compact-polynomial-c6 support-radius="3" />
-    </mapping:rbf-pum-direct> -->
-    <mapping:nearest-neighbor direction="read" constraint="conservative" from="MuscleMesh" to="FibersMesh"/>
+    </mapping:rbf-pum-direct>
+    <!-- <mapping:nearest-neighbor direction="read" constraint="consistent" from="MuscleMesh" to="FibersMesh"/> -->
 
     <export:vtk directory="../precice-output" every-n-time-windows="1"/>
   </participant>

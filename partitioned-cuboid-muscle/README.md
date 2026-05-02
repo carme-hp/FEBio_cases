@@ -38,6 +38,8 @@ A cuboid with size 3 x 3 x 12 cm.
 | **results3** | nearest-neighbour (muscle: 1st) | nearest-neighbour | no contraction, fiber mesh looks wrong  |
 | **results4** | nearest-neighbour (conservative) | nearest-neighbour | no contraction, fiber mesh looks wrong  |
 
+The experiments above are based on the coupling of OpenDiHu fibers to the FEBio mechanics. For the first setup (NN - NN), we tested the same configuration coupling OpenDiHu fibers to OpenDiHu mechanics and obtained the same results.  
+
 ![alt text](pics/mesh_comparison.png)
 
 on the left (fiber mesh looks as expected - results2) vs on the right (fiber mesh looks like the mechanics mesh)
