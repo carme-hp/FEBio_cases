@@ -48,7 +48,7 @@ Todo
 
 The FEbio simulation of the biceps does not converge already at the first timestep. This happens for all three tested meshes. The solution was to change the material parameters.
 
-- material parameters designed to mimic OpenDiHu mechanics 
+- Option 1: material parameters designed to mimic OpenDiHu mechanics 
 
 ```
 <material id="1" name="Material2" type="DiHuMaterial">
@@ -72,7 +72,7 @@ The FEbio simulation of the biceps does not converge already at the first timest
 </material>
 ```
 
-- material parameters extracted from an febio-only contraction (see `biceps-smooth2.feb`)
+- Option 2: material parameters extracted from an febio-only contraction (see `biceps-smooth2.feb`)
 
 ```  
 <material id="1" name="Material2" type="DiHuMaterial">
@@ -91,3 +91,7 @@ The FEbio simulation of the biceps does not converge already at the first timest
     </active_contraction>
 </material>
 ```
+
+Here is a comparison of the simulation results at 30ms choosing the material parameters according to option 2:
+
+![alt text](pics/opendihu_vs_febio.png)
