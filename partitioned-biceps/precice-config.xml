@@ -28,7 +28,7 @@
      
     <mapping:nearest-neighbor constraint="consistent" direction="read" from="MuscleFibersMesh" to="MuscleMesh"/>
 
-    <export:vtu directory="precice-output" every-n-time-windows="1"/>
+    <export:vtu directory="precice-output" every-n-time-windows="100"/>
 
   </participant>
 
@@ -44,7 +44,7 @@
     <mapping:rbf-pum-direct direction="read" from="MuscleMesh" to="MuscleFibersMesh" constraint="consistent" vertices-per-cluster="100">
       <basis-function:volume-splines />
     </mapping:rbf-pum-direct>
-    <export:vtu directory="precice-output" every-n-time-windows="1"/>
+    <export:vtu directory="precice-output" every-n-time-windows="100"/>
 
   </participant>
 
@@ -52,7 +52,7 @@
 
   <coupling-scheme:serial-explicit>
     <participants first="MuscleFibers" second="Muscle"/>
-    <max-time value="10.0"/>           
+    <max-time value="30.0"/>           
     <time-window-size value="0.01"/>   
     
     <exchange data="Gamma"    mesh="MuscleFibersMesh" from="MuscleFibers" to="Muscle"/>
