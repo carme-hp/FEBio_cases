@@ -52,7 +52,11 @@ To parse the `3D_mesh_1.vtk` the script `read_structured_vtk.py` from our reposi
 
 ## Mapping configuration
 
-**Open Issue:** Why does nearest-neighbor mapping does not work for the geometry?
+- **From Muscle to fibers**
+
+`nearest-neighbor` mapping does not work to transfer the geometry: since the geometry mesh is coarser, applying the geometry into the fibers mesh results into clustering the fiber points at the locations of the  points in the mechanics mesh.
+
+This can be easily checked by comparing the precice exports to the fiber solver output files (number of points is the same, but the points in the fiber solver overlap). In practice, the fiber simulation goes through, but no contraction is observed and the solution vector in the Fibers contains nans.
 
 |  | **geometry (from muscle to fibers)** | **gamma (from fibers to muscle)** | Observations |
 | --- | --- | --- | --- |
@@ -63,8 +67,6 @@ To parse the `3D_mesh_1.vtk` the script `read_structured_vtk.py` from our reposi
 | **results5** |  rbf (default, 3) |nearest-neighbour |  |
 | **results6** | nearest-neighbour, no initialization | nearest-neighbour | no contraction, fiber mesh looks wrong |
 
-In the cases where there is no contraction, the fiber mesh in the openDihu solver looks like the 3D mesh. Despite looking like the 3D mesh, the fiber mesh still has 4040 points, and not 633 like the mechanics mesh. Multiple points (3-6) have the exact same coordinates.
 
 ![alt text](pics/broken_mapping.png)
 
-The fiber simulation goes through despite the wrong mesh and nans everywhere. 
