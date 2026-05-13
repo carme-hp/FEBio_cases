@@ -5,6 +5,10 @@ Investigate the effect of maximum isometric active tension ($T_{max}$) on the Z-
 
 ## 2. Methodology
 * **Automated Extraction:** Bypassed the FEBioStudio GUI by modifying the baseline XML to include a `<logfile>` block. This automatically extracts the Z-displacement for Node 1773 and the Volume Ratio ($J$) for Element 12457.
+
+**Extraction Node Location:**
+![Node 1773 Location](images/node1773_location.png)
+
 * **Batch Execution:** Ran terminal simulations for $T_{max} \in \{2, 3, 4, 5\}$.
 * **Data Visualization:** Built a custom Python/Pandas script (`plot_sweep.py`) to parse the FEBio text logs and plot comparative contraction curves.
 
