@@ -1,0 +1,8 @@
+id = 124
+n_fibers = 300
+nx = 5
+ny = 5
+nz = 17
+L = 14
+Rmax = 3
+Rmin = 2

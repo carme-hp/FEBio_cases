@@ -29,10 +29,9 @@ ex_x, ex_y, ex_z = 3.0, 3.0, 12.0               # extent of muscle
 el_x, el_y, el_z = 3, 3, 12                     # number of elements
 bs_x, bs_y, bs_z = 2*el_x+1, 2*el_y+1, 2*el_z+1 # quadratic basis functions
 
-# -------------------------------------------------------------------
 # FEM mesh generation from .vts file
 # -------------------------------------------------------------------
-vtk_filename = "../3D_mesh_1.vtk"
+vtk_filename = "../meshes/3D_mesh_4x4x32.vtk"
 points, bs_x, bs_y, bs_z = read_structured_vtk.read_structured_vtk(vtk_filename)
 el_x, el_y, el_z = int((bs_x-1)/2), int((bs_y-1)/2), int((bs_z-1)/2)
 
@@ -50,7 +49,7 @@ meshes = { # create 3D mechanics mesh
 # fiber mesh generation from .json file
 # -------------------------------------------------------------------
 
-fiber_file = "../fibers_1.json"
+fiber_file = "../meshes/fibers_fine.json"
 with open(fiber_file,"r") as f:
 	fdata = json.load(f)
     
