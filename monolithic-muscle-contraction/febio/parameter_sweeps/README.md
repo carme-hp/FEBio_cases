@@ -50,7 +50,7 @@ A high-fidelity visualization strategy was developed using ParaView to explicitl
 Below is the baseline spatial transformation. By extracting the initial step ($t=0$) as a static wireframe reference shell (rendered at $30\%$ opacity), we capture a clear visualization of the muscle belly pulling away inward as the transient mesh reaches full displacement ($t=1.0$).
 
 ![Baseline Displacement Overlay Shell](images/baseline_displacement_overlay.png)
-*Baseline kinematic structural transformation at t=1.0 relative to the undeformed t=0 geometry (rendered as a 30% opacity wireframe). Note: The deformed state utilizes a 'Warp By Vector' filter (Scale Factor = 5.0) to visually amplify the contraction profile relative to the undeformed t=0 geometry via the coordinate translation $\mathbf{x}_{\text{visual}} = \mathbf{x}_{\text{initial}} + (5.0 \times \mathbf{u})$.*
+*Baseline kinematic structural transformation at t=1.0 relative to the undeformed t=0 geometry (rendered as a 30% opacity wireframe). Note: The deformed solid state utilizes a ParaView 'Warp By Vector' filter with a Scale Factor of 5.0 to visually amplify the contraction profile relative to the undeformed t=0 geometry.*
 
 ### 4.2 Quantitative Transient Tracking
 By capturing specific point markers natively over time across all simulation states, the following multi-view workspace layout tracks the explicit acceleration profile of the tendon interface alongside its physical displacement spatial domain.
@@ -67,7 +67,7 @@ To visually distinguish the progression of muscle contraction across the explora
 To resolve the tightly grouped geometric transformations, an identical displacement scaling multiplier ($\text{Scale Factor} = 5.0$) was applied across all concurrent layers to amplify boundary separation.
 
 ![Tmax Parameter Sweep Mesh Overlay](images/tmax_mesh_overlay.png)
-*Multi-surface structural contraction progression across the parameter sweep. Note: A ParaView 'Warp By Vector' filter has been applied across all concurrent layers using an identical displacement magnification multiplier (Scale Factor = 5.0) to visually resolve the tightly grouped geometric transformations via the coordinate translation $\mathbf{x}_{\text{visual}} = \mathbf{x}_{\text{initial}} + (5.0 \times \mathbf{u})$.*
+*Multi-surface structural contraction progression across the parameter sweep. Note: A ParaView 'Warp By Vector' filter with a Scale Factor of 5.0 has been applied across all concurrent layers to visually resolve the tightly grouped geometric transformations.*
 
 ---
 
