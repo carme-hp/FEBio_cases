@@ -20,7 +20,15 @@ To maintain professional reproducibility, the computational assets of this task 
 ### 3.1 Bypassing GUI Overhead
 To execute multi-run studies efficiently without graphical interface dependencies, the baseline FEBio text input deck was appended with a native `<logfile>` tracking schema block within the `<Output>` architecture. This commands the core-solver to output isolated numerical arrays directly during the convergence loops.
 
-[INSERT_XML_LOGFILE_BLOCK_HERE]
+```xml
+<Output>
+    <logfile>
+        <node_data data="uz" file="tmax5_disp.txt" nodes="1773"/>
+        <element_data data="sz" file="tmax5_stress.txt" elements="12457"/>
+        <element_data data="J" file="tmax5_vol.txt" elements="12457"/>
+    </logfile>
+</Output>
+```
 
 ### 3.2 Tracked Kinematic & Constitutive Targets
 1. **Global Contraction Tracker (Node 1773):** Positioned at the unconstrained tendon boundary to capture true axial displacement ($u_z$) over time.
