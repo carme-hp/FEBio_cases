@@ -42,6 +42,7 @@ A high-fidelity visualization strategy was developed using ParaView to explicitl
 Below is the baseline spatial transformation. By extracting the initial step ($t=0$) as a static wireframe reference shell (rendered at $30\%$ opacity), we capture a clear visualization of the muscle belly pulling away inward as the transient mesh reaches full displacement ($t=1.0$).
 
 ![Baseline Displacement Overlay Shell](images/baseline_displacement_overlay.png)
+*Figure 1: Baseline kinematic structural transformation at t=1.0 relative to the undeformed t=0 geometry (rendered as a 30% opacity wireframe). Note: The deformed state utilizes a 'Warp By Vector' filter (Scale Factor = 5.0) to visually amplify the contraction profile.*
 
 ### 4.2 Quantitative Transient Tracking
 By capturing specific point markers natively over time across all simulation states, the following multi-view workspace layout tracks the explicit acceleration profile of the tendon interface alongside its physical displacement spatial domain.
