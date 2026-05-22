@@ -55,7 +55,7 @@ Below is the baseline spatial transformation. By extracting the initial step ($t
 ### 4.2 Quantitative Transient Tracking
 By capturing specific point markers natively over time across all simulation states, the following multi-view workspace layout tracks the explicit acceleration profile of the tendon interface alongside its physical displacement spatial domain.
 
-![Baseline Displacement Over Time Layout](images/baseline_displacement_over_time_plot.png)
+![Baseline Displacement Over Time Layout](images/baseline_combined_view.png)
 
 ---
 
