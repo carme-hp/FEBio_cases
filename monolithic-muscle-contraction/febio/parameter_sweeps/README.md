@@ -85,7 +85,93 @@ The text logs autonomously extracted via the pipeline were processed using [`plo
 
 ---
 
-## 7. Next Steps: Phase 2 Calibration
-To transition this model into a realistic physiological simulation, the arbitrary parameter bounds explored in this baseline setup will be re-calibrated during Phase 2. This will involve:
-* Transitioning the linear activation drive to a physiological step/activation function.
-* Restructuring $T_{\max} = \text{variance}$ intervals based on established biomechanics literature to simulate target muscle health states (e.g., peak fiber recruitment vs. localized fatigue states).
+## 7. Material Sensitivity Study: Isotropic Matrix Stiffness ($c_1$)
+
+### 7.1 Clinical & Physical Objective
+To investigate how pathological alterations in the muscle's extracellular matrix (ECM) affect overall contracting function, a material sensitivity analysis was conducted on the isotropic matrix shear stiffness coefficient ($c_1$). 
+
+In biomechanics, tracking matrix variations allows us to simulate and quantify structural tissue abnormalities. By scaling the baseline parameter across a specific spectrum ($0.5\times$ to $4.0\times$), we explicitly model distinct muscle tissue health conditions:
+* **$0.5\times c_1$ ($6.925\text{ MPa}$):** Degraded / Hypotonic Matrix (simulating muscle wasting or structural ECM degradation).
+* **$1.0\times c_1$ ($13.85\text{ MPa}$):** Healthy Control Baseline (normal physiological muscle state).
+* **$2.0\times c_1$ ($27.70\text{ MPa}$):** Mild Matrix Fibrosis (early-stage post-injury structural scarring).
+* **$4.0\times c_1$ ($55.40\text{ MPa}$):** Severe Pathological Fibrosis (chronic, dense connective tissue proliferation).
+
+---
+
+### 7.2 Expanded Repository Layout
+To support Strategy A (modular parameter tracking), dedicated asset vaults were integrated into the existing folder tree to keep the repository highly scannable and isolated:
+* **Input Decks:** [`feb_inputs/matrix_stiffness_c1/`](feb_inputs/matrix_stiffness_c1/) — Holds the individual structural XML configuration files (`biceps_c1_0.5.feb` through `biceps_c1_4.0.feb`).
+* **Text Streams:** [`raw_logs/matrix_stiffness_c1/`](raw_logs/matrix_stiffness_c1/) — Clean data vault containing ASCII numerical streams (`c1_*_disp.txt`) and solver diagnostic trackers (`c1_*.log`).
+* **Automation Workspace:** [`scripts/`](scripts/) — Dedicated script folder isolating automation and parsing execution assets from the root.
+    * [`scripts/run_sweep_c1.py`](scripts/run_sweep_c1.py) — Automated execution loop and post-run file organizer.
+    * [`scripts/plot_sweep_c1.py`](scripts/plot_sweep_c1.py) — High-fidelity parsing and visualization generator.
+* **Visual Databases:** [`febio_plots/matrix_stiffness_c1/`](febio_plots/matrix_stiffness_c1/) — Contains the high-fidelity 3D binary visual files (`biceps_c1_*.xplt`).
+
+---
+
+### 7.3 Core Modifications & Pipeline Adjustments
+
+#### 7.3.1 Material Constant Scaling
+Within the `<Material>` definition block of the FEBio input configuration, the isotropic matrix stiffness parameter `<c1>` was isolated and scaled across the test spectrum. For clarity, the following snippet illustrates the specific case of the **0.5x scaled model (`biceps_c1_0.5.feb`)** where the baseline value of $13.85\text{ MPa}$ was halved to $6.925\text{ MPa}$:
+
+```xml
+<Material>
+    <material id="1" name="Material1" type="trans iso Mooney-Rivlin">
+        <density>1</density>
+        <k>100</k>
+        <pressure_model>default</pressure_model>
+        <c1>6.925</c1>        <c2>0</c2>
+        <c3>2.07</c3>
+        <c4>61.44</c4>
+        <c5>640.7</c5>
+        <lam_max>1.03</lam_max>
+        <fiber type="vector">
+            <vector>0,0,1</vector>
+        </fiber>
+        <active_contraction>
+            <ascl lc="1">1</ascl>
+            <Tmax>1</Tmax>
+            <ca0>4.35</ca0>
+            <camax>0</camax>
+            <beta>4.75</beta>
+            <l0>1.58</l0>
+            <refl>2.04</refl>
+        </active_contraction>
+    </material>
+</Material>
+```
+
+#### 7.3.2 Isolated Text Output Routing
+To prevent concurrent execution runs from overwriting tracking data streams, unique file logging targets were injected directly inside the `<Output>` architecture blocks. To maintain excellent file hygiene, the target paths were routed relatively to pipe results straight into the `raw_logs/` data subdirectory:
+
+```xml
+<Output>
+    <plotfile type="febio">
+        <var type="displacement"/>
+        <var type="stress"/>
+    </plotfile>
+    <logfile>
+        <node_data data="uz" file="../../raw_logs/matrix_stiffness_c1/c1_0.5_disp.txt" nodes="1773"/>
+        <element_data data="sz" file="../../raw_logs/matrix_stiffness_c1/c1_0.5_stress.txt" elements="12457"/>
+        <element_data data="J" file="../../raw_logs/matrix_stiffness_c1/c1_0.5_vol.txt" elements="12457"/>
+    </logfile>
+</Output>
+```
+
+---
+
+### 7.4 Quantitative Analysis & Material Sensitivity Plot
+
+The extracted text streams tracking the unconstrained tendon boundary (Node 1773) were compiled via [`scripts/plot_sweep_c1.py`](scripts/plot_sweep_c1.py), outputting a crisp, publication-grade transient sensitivity curve:
+
+![Matrix Stiffness c1 Sweep Comparison](images/matrix_stiffness_c1/c1_sweep_comparison.png)
+*Quantitative transient tracking curves isolating Node 1773 Z-displacement across the isotropic matrix stiffness spectrum ($c_1$).*
+
+#### Key Biomechanical Findings:
+1. **Kinematic Restriction:** The sensitivity analysis confirms a severe, non-linear inverse relationship between extracellular matrix stiffness and active contracting shortening capacity. Even though active fiber recruitment forces remain completely identical across all four test simulations, the muscle is forced to expend active energy deforming its own passive surrounding structures. 
+2. **Pathological Quantities:**
+    * The **Degraded Matrix ($0.5\times c_1$)** exhibits minimal internal structural resistance, resulting in hyper-mobility with a peak displacement exceeding **0.44 mm**.
+    * The **Healthy Control Baseline ($1.0\times c_1$)** settles into an optimized physiological contraction curve peaking at **0.24 mm**.
+    * **Mild Fibrosis ($2.0\times c_1$)** restricts total tendon displacement down to **0.14 mm**.
+    * **Severe Pathological Fibrosis ($4.0\times c_1$)** locks the continuum structure into a highly constrained state, crippling performance down to a maximum displacement bound of just **0.08 mm** (a $66.7\%$ reduction in functional contraction relative to healthy tissue).
+3. **Preservation of Activation Physics:** The uniform scaling of the dynamic, multi-stage "S-curve" wave shape across all four curves validates that the underlying active fiber load controller remains perfectly stable across the runs; the performance degradation is driven entirely by the passive matrix parameter variations.
