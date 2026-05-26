@@ -263,13 +263,13 @@ The extracted text streams tracking the unconstrained tendon boundary (Node 1773
 #### 8.4.1 Macro Kinematic Trend
 The primary plot captures the global timeline of tendon boundary Z-displacement across the entire 30-second simulation:
 
-![Macro Fiber Stiffness Sensitivity](images/c3_sweep_comparison.png)
+![Macro Fiber Stiffness Sensitivity](images/fiber_stiffness_c3/c3_sweep_comparison.png)
 *Quantitative transient tracking curves isolating Node 1773 Z-displacement across the entire simulation time domain.*
 
 #### 8.4.2 Micro-Scale Divergence Window
 The secondary plot isolates the terminal step transition ($t = 29.85\text{ s}$ to $30.0\text{ s}$) with an amplified Y-axis scale to reveal the hidden numerical divergence across the runs:
 
-![Micro Fiber Stiffness Sensitivity Zoom](images/c3_sweep_comparison_zoomed.png)
+![Micro Fiber Stiffness Sensitivity Zoom](images/fiber_stiffness_c3/c3_sweep_comparison_zoomed.png)
 *Refined terminal micro-scale window isolating the fractional displacement divergence under peak contraction loads.*
 
 #### 8.4.3 Interconnected Mechanical Findings:
