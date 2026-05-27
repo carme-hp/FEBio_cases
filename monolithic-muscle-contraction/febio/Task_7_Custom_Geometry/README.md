@@ -1,4 +1,4 @@
-# Task 7: Skeletal Muscle Cylinder Simulation (Validation Workflow)
+# Skeletal Muscle Cylinder Simulation (Validation Workflow)
 
 ## Overview
 This directory contains the initial FEBioStudio simulation files for modeling a simple cylindrical representation of skeletal muscle tissue. The objective of this preliminary task is to establish and validate a stable finite element pipeline—from CAD geometry processing to passive tensile testing—before applying the workflow to the complex, assigned biological muscle geometry.
