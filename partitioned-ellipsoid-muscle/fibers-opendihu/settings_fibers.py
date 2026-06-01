@@ -149,7 +149,7 @@ config = {
               "OutputWriter": [
                 {
                   "format":         "Paraview",
-                  "outputInterval": int(1.0 / variables.dt_splitting * variables.output_interval),
+                  "outputInterval": 10*int(1.0 / variables.dt_splitting * variables.output_interval),
                   "filename":       "../results-opendihu-fibers/" + "fibers",
                   "fileNumbering":  "incremental",
                   "binary":         True,
@@ -199,7 +199,7 @@ config = {
     "valueForStimulatedPoint":                              20.0,
     "onlyComputeIfHasBeenStimulated":                       True,
     "disableComputationWhenStatesAreCloseToEquilibrium":    True,
-    "neuromuscularJunctionRelativeSize":                    0.1,
+    "neuromuscularJunctionRelativeSize":                    0.0,
     "generateGPUSource":                                    True,
     "useSinglePrecision":                                   False
   }

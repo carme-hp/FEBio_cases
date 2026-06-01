@@ -87,7 +87,7 @@ config = {
       "OutputWriter": [
         {
           "format":             "Paraview",
-          "outputInterval":     int(1.0 / variables.dt_3D * variables.output_interval),
+          "outputInterval":     10*int(1.0 / variables.dt_3D * variables.output_interval),
           "filename":           "../results-opendihu-muscle/" + "muscle",
           "fileNumbering":      "incremental", 
           "binary":             True,

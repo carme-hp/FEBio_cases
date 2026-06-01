@@ -31,7 +31,7 @@
       <basis-function:compact-polynomial-c6 support-radius="3" />
     </mapping:rbf-pum-direct>
     
-    <export:vtk directory="../precice-output" every-n-time-windows="1"/>
+    <!-- <export:vtk directory="../precice-output" every-n-time-windows="1"/> -->
   </participant>
     
   <participant name="Muscle">
@@ -41,11 +41,12 @@
     <read-data name="Gamma" mesh="MuscleMesh"/>
     <write-data name="Geometry" mesh="MuscleMesh"/>
 
-    <mapping:rbf-pum-direct project-to-input="false" vertices-per-cluster="100" relative-overlap="0.2" constraint="consistent" direction="read" from="FibersMesh" to="MuscleMesh" >
+    <mapping:nearest-neighbor direction="read" from="FibersMesh" to="MuscleMesh" constraint="consistent" />
+    <!-- <mapping:rbf-pum-direct project-to-input="false" vertices-per-cluster="100" relative-overlap="0.2" constraint="consistent" direction="read" from="FibersMesh" to="MuscleMesh" >
         <basis-function:compact-polynomial-c6 support-radius="3" />
-    </mapping:rbf-pum-direct>
+    </mapping:rbf-pum-direct> -->
 
-    <export:vtk directory="../precice-output" every-n-time-windows="1"/>
+    <!-- <export:vtk directory="../precice-output" every-n-time-windows="1"/> -->
   </participant>
 
   <m2n:sockets acceptor="Fibers" connector="Muscle" exchange-directory=".."/>

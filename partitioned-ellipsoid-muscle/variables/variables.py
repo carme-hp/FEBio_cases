@@ -22,6 +22,9 @@ output_interval = dt_3D # time interval between outputs
 pmax = 7.3                                                  # maximum active stress
 rho = 10                                                    # density of the muscle
 material_parameters = [3.176e-10, 1.813, 1.075e-2, 1.0]     # [c1, c2, b, d]
+
+material_parameters = [3.176e-10,1.813, 1.075e-2, 9.1733]
+
 diffusion_prefactor = 3.828 / (500.0 * 0.58)                # Conductivity / (Am * Cm)
 
 # Meshes
@@ -31,7 +34,7 @@ bs_x, bs_y, bs_z = 2*el_x+1, 2*el_y+1, 2*el_z+1 # quadratic basis functions
 
 # FEM mesh generation from .vts file
 # -------------------------------------------------------------------
-vtk_filename = "../meshes/3D_mesh_4x4x32.vtk"
+vtk_filename = "../meshes/3D_mesh_4x4x16.vtk"
 points, bs_x, bs_y, bs_z = read_structured_vtk.read_structured_vtk(vtk_filename)
 el_x, el_y, el_z = int((bs_x-1)/2), int((bs_y-1)/2), int((bs_z-1)/2)
 
