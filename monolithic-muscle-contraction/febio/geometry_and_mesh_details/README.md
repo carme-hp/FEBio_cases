@@ -6,10 +6,14 @@ This directory serves as the dedicated asset repository for the physical shapes 
 
 ## Standard Geometry & Meshing Pipeline
 
-To ensure high-quality finite element simulations and avoid structural artifacts during large hyperelastic deformations, all geometries in this folder follow a consistent, two-step surface-to-volume preprocessing workflow within FEBioStudio:
+To ensure high-quality finite element simulations and avoid structural artifacts during large hyperelastic deformations, geometries in this folder are preprocessed using one of the following workflows depending on the geometry source:
 
-1. **Surface Remeshing (MMG Remesh):** Raw CAD or segmented biological surface shells (typically `.stl` files) are processed using the MMG Remesh tool. This step artificial shatters irregular or large CAD faces into a highly uniform, optimized boundary triangular web to prepare for stable volumetric packing.
-2. **Volumetric Packing (TetGen):** With surface constraints uniform, the TetGen integration utility is utilized to fill the enclosed interior volume with solid tetrahedral elements, translating a hollow shell into a continuous continuum domain.
+**Workflow A — CAD-exported idealized geometries:**
+1. **Surface Remeshing (MMG Remesh):** Raw CAD surface shells (`.stl` files) are processed using the MMG Remesh tool within FEBioStudio, redistributing irregular faces into a uniform boundary triangular mesh to prepare for stable volumetric packing.
+2. **Volumetric Packing (TetGen):** The TetGen integration utility within FEBioStudio fills the enclosed interior volume with solid tetrahedral elements, translating the surface shell into a continuous continuum domain.
+
+**Workflow B — Segmented biological geometries:**
+1. **Surface Remeshing (Blender / MeshLab):** Segmented biological surface meshes are cleaned, smoothed, and remeshed using Blender and MeshLab prior to import into FEBioStudio.
 
 ---
 
@@ -42,7 +46,7 @@ Due to the highly intricate surface features of the biological muscle, a signifi
 
 | Metric | Specification |
 | :--- | :--- |
-| **Primary File** | `TA_poisson.feb` (Mesh-Only) |
+| **Primary File** | `TA_poisson.stl` |
 | **Element Type** | TET4 (Linear Tetrahedron) |
 | **Total Elements** | 196,956 |
 | **Total Nodes** | 44,597 |
