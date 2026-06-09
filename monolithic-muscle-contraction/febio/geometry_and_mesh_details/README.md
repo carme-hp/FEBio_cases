@@ -14,7 +14,7 @@ To ensure high-quality finite element simulations and avoid structural artifacts
 
 **Workflow B — Segmented biological geometries:**
 1. **Surface Remeshing (Blender / MeshLab):** Segmented biological surface meshes are cleaned, smoothed, and remeshed using Blender and MeshLab prior to import into FEBioStudio.
-
+2. **Volumetric Packing (TetGen):** Same TetGen step as Workflow A is applied within FEBioStudio to fill the enclosed surface shell with solid tetrahedral elements.
 ---
 
 ## 1. Skeletal Muscle Cylinder (Idealized Geometry)
