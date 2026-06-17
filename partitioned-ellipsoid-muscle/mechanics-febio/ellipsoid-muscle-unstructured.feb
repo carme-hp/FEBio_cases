@@ -2,7 +2,7 @@
 <febio_spec version="4.0">
 	<Module type="solid"/>
 	<Code>
-		<callback name="preCICEAdapter"/>
+		<callback name="precice_callback"/>
 	</Code>
 	<Control>
 		<analysis>DYNAMIC</analysis>
@@ -67,20 +67,18 @@
 		</Constants>
 	</Globals>
 	<Material>
-		<material id="1" name="Material2" type="DiHuMaterial">
-			<density>10</density>
-			<k>100</k>
-			<pressure_model>default</pressure_model>
+		<material id="1" name="Material2" type="GammaMaterial">
 			<c1>3.176e-10</c1>
 			<c2>1.813</c2>
 			<c3>2.07</c3>
 			<c4>61.44</c4>
 			<c5>640.7</c5>
+			<k>100.0</k>
 			<lam_max>1.03</lam_max>
 			<fiber type="vector">
 				<vector>0,0,1</vector>
 			</fiber>
-			<active_contraction type="DiHuContraction">
+			<active_contraction type="GammaContraction">
 				<pmax>7.3</pmax>
 				<lam_opt>1.2</lam_opt>
 				<enable_force_length_relation>1</enable_force_length_relation>
