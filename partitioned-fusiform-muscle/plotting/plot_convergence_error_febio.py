@@ -164,17 +164,17 @@ def compute_relative_error(reference_values: list[float], simulation_values: lis
 
 # Define mesh configurations: (folder_name, num_elements, timestep_file, grid_type)
 MESH_CONFIGS = [
-    ("results_febio_2x2x8", 2 * 2 * 8, "ellipsoid-muscle-2x2x8.t300.vtk", "structured"),
-    ("results_febio_4x4x16", 4 * 4 * 16, "ellipsoid-muscle-4x4x16.t300.vtk", "structured"),
-    ("results_febio_8x8x32", 8 * 8 * 32, "ellipsoid-muscle-8x8x32.t300.vtk", "structured"),
-    ("results_febio_492", 492, "ellipsoid-muscle-492.t300.vtk", "unstructured"),
-    ("results_febio_1041", 1041, "ellipsoid-muscle-1041.t300.vtk", "unstructured"),
-    ("results_febio_16x16x64", 16 * 16 * 64, "ellipsoid-muscle-16x16x64.t300.vtk", "structured"),
+    ("results_febio_2x2x8", 2 * 2 * 8, "fusiform-muscle-2x2x8.t300.vtk", "structured"),
+    ("results_febio_4x4x16", 4 * 4 * 16, "fusiform-muscle-4x4x16.t300.vtk", "structured"),
+    ("results_febio_8x8x32", 8 * 8 * 32, "fusiform-muscle-8x8x32.t300.vtk", "structured"),
+    ("results_febio_492", 492, "fusiform-muscle-492.t300.vtk", "unstructured"),
+    ("results_febio_1041", 1041, "fusiform-muscle-1041.t300.vtk", "unstructured"),
+    ("results_febio_16x16x64", 16 * 16 * 64, "fusiform-muscle-16x16x64.t300.vtk", "structured"),
 ]
 
 # Reference mesh (finest resolution)
 REFERENCE_FOLDER = "results_febio_16x16x64"
-REFERENCE_FILE = "results_febio_16x16x64/ellipsoid-muscle-16x16x64.t300.vtk"
+REFERENCE_FILE = "results_febio_16x16x64/fusiform-muscle-16x16x64.t300.vtk"
 REFERENCE_NUM_CELLS = 16 * 16 * 64
 
 # Data array to compare (e.g., displacement)

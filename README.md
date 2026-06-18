@@ -9,7 +9,7 @@ We simulate muscle contraction using a partitioned approach. We couple the elect
 
 - [partitioned-cuboid-muscle](partitioned-cuboid-muscle): Contraction of a cuboid muscle. Geometry is manually defined in OpenDiHu. Mechanics are implemented in OpenDiHu and in FEBio (both structured grid). 
 
-- [partitioned-ellipsoid-muscle](partitioned-ellipsoid-muscle): Contraction of an ellipsoid muscle. Geometry is created using https://github.com/carme-hp/muscle_prestretch_dataset/tree/main (fibers are read from a .json file).
+- [partitioned-fusiform-muscle](partitioned-fusiform-muscle): Contraction of an fusiform muscle. Geometry is created using https://github.com/carme-hp/muscle_prestretch_dataset/tree/main (fibers are read from a .json file).
 
 - [partitioned-biceps](partitioned-biceps): Contraction of the biceps. Geometry is read from OpenDiHu hard-coded files created by Benjamin Maier. Mechanics are implemented in OpenDiHu (structured grid) and in FEBio (unstructured grid).
 

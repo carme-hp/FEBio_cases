@@ -1,4 +1,4 @@
-# Partitioned ellipsoid muscle
+# Partitioned fusiform muscle
 
 Here we provide the configuration files to run coupled simulations on an idealized artificial fusiform muscle. The muscle has a length of 14 cm with an initial maximum radius of 3 cm and a mininum radius of 2 cm. 
 
@@ -7,7 +7,7 @@ Here we provide the configuration files to run coupled simulations on an idealiz
 The simulations are based on the simultaneous run of two preCICE participants. Hence, two terminals are needed, one for the fibers participants and the other for the mechanics participants. Since the fibers participant is only implemented in OpenDiHu, installing OpenDiHu is a must and you can refer to the above. 
 
 
-### 3.1 Running the fibers participant
+### 1.1 Running the fibers participant
 
 The fibers participant is implemented and needs to be built with OpenDiHu first using `mkorn && sr`.
 
@@ -17,7 +17,7 @@ mkorn && sr
 ./build_release/fibers settings_fibers.py
 ``` 
 
-### 3.2 Running the fibers participant
+### 1.2 Running the fibers participant
 
 The mechanics participant is implemented both in OpenDiHu and in FEBio.
 
@@ -37,7 +37,7 @@ For executing the FEBio solver, simply call the script `run.sh` with your desire
 
 ```
 cd mechanics-febio
-./run.sh ellipsoid-muscle.feb
+./run.sh fusiform-muscle.feb
 ```
 
 ## 2. Selecting the mesh

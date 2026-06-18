@@ -169,10 +169,10 @@ def compute_relative_error(reference_values: list[float], simulation_values: lis
 
 # FEBio structured grid configurations
 FEBIO_CONFIGS = [
-    ("results_febio_2x2x8", 2 * 2 * 8, "ellipsoid-muscle-2x2x8.t300.vtk"),
-    ("results_febio_4x4x16", 4 * 4 * 16, "ellipsoid-muscle-4x4x16.t300.vtk"),
-    ("results_febio_8x8x32", 8 * 8 * 32, "ellipsoid-muscle-8x8x32.t300.vtk"),
-    ("results_febio_16x16x64", 16 * 16 * 64, "ellipsoid-muscle-16x16x64.t300.vtk"),
+    ("results_febio_2x2x8", 2 * 2 * 8, "fusiform-muscle-2x2x8.t300.vtk"),
+    ("results_febio_4x4x16", 4 * 4 * 16, "fusiform-muscle-4x4x16.t300.vtk"),
+    ("results_febio_8x8x32", 8 * 8 * 32, "fusiform-muscle-8x8x32.t300.vtk"),
+    ("results_febio_16x16x64", 16 * 16 * 64, "fusiform-muscle-16x16x64.t300.vtk"),
 ]
 
 # OpenDiHu configurations
@@ -184,7 +184,7 @@ OPENDIHU_CONFIGS = [
 ]
 
 # Reference files
-FEBIO_REFERENCE_FILE = "results_febio_16x16x64/ellipsoid-muscle-16x16x64.t300.vtk"
+FEBIO_REFERENCE_FILE = "results_febio_16x16x64/fusiform-muscle-16x16x64.t300.vtk"
 FEBIO_REFERENCE_NUM_CELLS = 16 * 16 * 64
 
 OPENDIHU_REFERENCE_FILE = "results_16x16x64/results-opendihu-muscle/muscle_0000299.vtu"

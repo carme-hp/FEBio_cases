@@ -10,7 +10,7 @@ The `.json` file should have the following structure:
 }
 ```
 
-If you want to create fiber meshes for dummy ellipsoid muscles, we refer you to use [our pipeline](https://github.com/carme-hp/muscle_prestretch_dataset/tree/main).
+If you want to create fiber meshes for artificial fusiform muscles, we refer you to use [our pipeline](https://github.com/carme-hp/muscle_prestretch_dataset/tree/main).
 
 The creation of `.json` files from imaging data is supported via [BioMesh](https://github.com/opendihu/biomesh).
 
