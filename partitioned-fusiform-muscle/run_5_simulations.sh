@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -u
 
 # Script to run 5 coupled simulations
 # Each iteration runs muscle and fibers simulations in parallel, then saves results
