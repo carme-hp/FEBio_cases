@@ -13,3 +13,6 @@ echo "Launching mechanics-opendihu:"
 cd mechanics-opendihu && . run.sh &
 echo ""
 echo "========================================"
+echo "Waiting for simulations to complete..."
+wait
+echo "✓ All simulations completed!"

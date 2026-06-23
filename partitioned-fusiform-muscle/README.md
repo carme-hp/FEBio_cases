@@ -15,6 +15,8 @@ cd fibers-opendihu
 mkorn && sr
 ./build_release/fibers settings_fibers.py
 ``` 
+Alternatively, just do `./run.sh` inside the directory `fibers-opendihu`.
+
 
 ### 1.2 Running the mechanics participant
 
@@ -29,6 +31,7 @@ cd mechanics-opendihu
 mkorn && sr
 ./build_release/muscle settings_muscle.py
 ``` 
+Alternatively, just do `./run.sh` inside the directory `mechanics-opendihu`. Or to run both participants directly, run `./run-opendihu-opendihu.sh` on the main directory.
 
 - Option 2: FEBio
 
@@ -38,6 +41,8 @@ For executing the FEBio solver, simply call the script `run.sh` with your desire
 cd mechanics-febio
 ./run.sh fusiform-muscle.feb
 ```
+If no input file is given, the default is the `fusiform-muscle.feb`.
+Or to run both participants directly, run `./run-opendihu-febio.sh` on the main directory.
 
 ## 2. Selecting the mesh
 

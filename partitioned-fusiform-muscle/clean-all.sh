@@ -9,7 +9,7 @@ for dir in fibers-opendihu mechanics-febio mechanics-opendihu; do
 done
 
 echo "Cleaning main directory..."
-rm -r results-opendihu-opendihu results-opendihu-febio precice-output precice-run
+rm -rf results-opendihu-opendihu results-opendihu-febio precice-output precice-run
 
 
 echo "Clean complete!"

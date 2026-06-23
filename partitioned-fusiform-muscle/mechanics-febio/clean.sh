@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-rm -r precice-profiling
+rm -rf precice-profiling
 rm -f *.xplt *.log

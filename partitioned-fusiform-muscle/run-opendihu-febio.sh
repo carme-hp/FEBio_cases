@@ -16,3 +16,6 @@ echo "Launch mechanics-febio:"
 cd mechanics-febio && . run.sh &
 echo ""
 echo "========================================"
+echo "Waiting for simulations to complete..."
+wait
+echo "✓ All simulations completed!"
