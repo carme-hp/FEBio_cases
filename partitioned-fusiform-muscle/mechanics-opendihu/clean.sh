@@ -1,4 +1,4 @@
-#!/bin/bash
-rm -r precice-run precice-output precice-profiling
-rm -r results-opendihu-muscle
-rm -rf logs
+#!/usr/bin/env bash
+set -e -u
+rm -r results precice-profiling logs
+rm -f *.log

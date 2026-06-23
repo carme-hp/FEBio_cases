@@ -1,4 +1,3 @@
-#!/bin/bash
-rm -r precice-run precice-output precice-profiling
+#!/usr/bin/env bash
+rm -r precice-profiling
 rm -f *.xplt *.log
-rm -rf results_material

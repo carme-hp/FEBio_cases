@@ -1,4 +1,3 @@
-#!/bin/bash
-rm -r precice-run precice-output precice-profiling
-rm -r results-opendihu-fibers
-rm -rf logs
+#!/usr/bin/env bash
+rm -r results precice-profiling logs
+rm -f *.log

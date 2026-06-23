@@ -21,8 +21,8 @@ config = {
   "scenarioName":                   scenario_name,
 
   "logFormat":                      "csv",
-  "mappingsBetweenMeshesLogFile":   "../results-opendihu-fibers/" + "fibers_mappings_between_meshes_log.txt",
-  "solverStructureDiagramFile":     "../results-opendihu-fibers/" + "fibers_solver_structure_diagram.txt",
+  "mappingsBetweenMeshesLogFile":   "results/" + "fibers_mappings_between_meshes_log.txt",
+  "solverStructureDiagramFile":     "results/" + "fibers_solver_structure_diagram.txt",
   
   "Meshes":                         variables.meshes,
   "MappingsBetweenMeshes":          {},
@@ -107,7 +107,7 @@ config = {
                   "CellML": {
                     "modelFilename":            variables.input_dir + "hodgkin_huxley-razumova.cellml",
                     "meshName":                 "fiber{}".format(fiber),
-                    "stimulationLogFilename":   "../results-opendihu-fibers/"+ "fibers_stimulation.log",
+                    "stimulationLogFilename":   "results/"+ "fibers_stimulation.log",
 
                     "statesInitialValues":                          [],
                     "initializeStatesToEquilibrium":                False,
@@ -150,7 +150,7 @@ config = {
                 {
                   "format":         "Paraview",
                   "outputInterval": 10*int(1.0 / variables.dt_splitting * variables.output_interval),
-                  "filename":       "../results-opendihu-fibers/" + "fibers",
+                  "filename":       "results/" + "fibers",
                   "fileNumbering":  "incremental",
                   "binary":         True,
                   "fixedFormat":    False,
