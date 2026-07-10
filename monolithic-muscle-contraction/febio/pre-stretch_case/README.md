@@ -9,7 +9,7 @@ This directory contains the FEBio input models and reference cases for implement
 * **`biceps-muscle-contraction.feb`**
     * The baseline model file used as the primary reference.
 * **`biceps-muscle-contraction_ps01.feb`**
-    * An initial pre-strain test case of the biceps model, built specifically using the configuration reference from `forum_samples/ps01.feb`.
+    * An initial pre-strain test case of the biceps model, built using the configuration reference from `forum_samples/ps01.feb`. In this version, only **20 elements at the free end of the muscle** are selected to have pre-stretch applied.
 * **`biceps-muscle-contraction-prestrain.feb`**
     * A multi-step version of the baseline file. It splits the simulation into two distinct sequential steps:
         1. **Step 1:** Applies the pre-strain.
