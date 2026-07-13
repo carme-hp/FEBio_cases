@@ -1,0 +1,2 @@
+# Ignore Windows Zone.Identifier files created in WSL
+*Zone.Identifier
