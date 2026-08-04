@@ -6,3 +6,4 @@
 *.xplt
 *.vtk
 *.VTK
+*vtk.series
