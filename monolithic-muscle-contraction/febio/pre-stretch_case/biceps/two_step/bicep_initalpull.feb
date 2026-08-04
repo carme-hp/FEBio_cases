@@ -1,41 +1,84 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <febio_spec version="4.0">
 	<Module type="solid"/>
+	<Control>
+		<analysis>STATIC</analysis>
+		<time_steps>20</time_steps>
+		<step_size>0.1</step_size>
+		<plot_zero_state>0</plot_zero_state>
+		<plot_range>0,-1</plot_range>
+		<plot_level>PLOT_MAJOR_ITRS</plot_level>
+		<output_level>OUTPUT_MAJOR_ITRS</output_level>
+		<plot_stride>1</plot_stride>
+		<output_stride>1</output_stride>
+		<adaptor_re_solve>1</adaptor_re_solve>
+		<time_stepper type="default">
+			<max_retries>5</max_retries>
+			<opt_iter>10</opt_iter>
+			<dtmin>0.01</dtmin>
+			<dtmax>0.1</dtmax>
+			<aggressiveness>0</aggressiveness>
+			<cutback>0.5</cutback>
+			<dtforce>0</dtforce>
+		</time_stepper>
+		<solver type="solid">
+			<symmetric_stiffness>symmetric</symmetric_stiffness>
+			<equation_scheme>staggered</equation_scheme>
+			<equation_order>default</equation_order>
+			<optimize_bw>0</optimize_bw>
+			<lstol>0.9</lstol>
+			<lsmin>0.01</lsmin>
+			<lsiter>5</lsiter>
+			<ls_check_jacobians>0</ls_check_jacobians>
+			<max_refs>15</max_refs>
+			<check_zero_diagonal>0</check_zero_diagonal>
+			<zero_diagonal_tol>0</zero_diagonal_tol>
+			<force_partition>0</force_partition>
+			<reform_each_time_step>1</reform_each_time_step>
+			<reform_augment>0</reform_augment>
+			<diverge_reform>1</diverge_reform>
+			<min_residual>1e-20</min_residual>
+			<max_residual>0</max_residual>
+			<dtol>0.001</dtol>
+			<etol>0.01</etol>
+			<rtol>0</rtol>
+			<rhoi>-2</rhoi>
+			<alpha>1</alpha>
+			<beta>0.25</beta>
+			<gamma>0.5</gamma>
+			<logSolve>0</logSolve>
+			<arc_length>0</arc_length>
+			<arc_length_scale>0</arc_length_scale>
+			<qn_method type="BFGS">
+				<max_ups>10</max_ups>
+				<max_buffer_size>0</max_buffer_size>
+				<cycle_buffer>1</cycle_buffer>
+				<cmax>100000</cmax>
+			</qn_method>
+		</solver>
+	</Control>
 	<Globals>
 		<Constants>
 			<T>0</T>
+			<P>0</P>
 			<R>0</R>
 			<Fc>0</Fc>
 		</Constants>
 	</Globals>
 	<Material>
-		<material id="1" name="Material1" type="uncoupled prestrain elastic">
-			<k>100</k>
+		<material id="1" name="Material1" type="trans iso Mooney-Rivlin">
 			<density>1</density>
-			<elastic type="trans iso Mooney-Rivlin">
-				<c1>13.85</c1>
-				<c2>0</c2>
-				<c3>2.07</c3>
-				<c4>61.44</c4>
-				<c5>640.7</c5>
-				<lam_max>1.03</lam_max>
-				<fiber type="vector">
-					<vector>0,0,1</vector>
-				</fiber>
-				<active_contraction type="uncoupled active_contraction">
-					<ascl lc="2">1</ascl>
-					<Tmax>1</Tmax>
-					<ca0>4.35</ca0>
-					<camax>0</camax>
-					<beta>4.75</beta>
-					<l0>1.58</l0>
-					<refl>2.04</refl>
-				</active_contraction>
-			</elastic>
-			<prestrain type="in-situ stretch">
-				<stretch lc="1">1.05</stretch>
-				<isochoric>1</isochoric>
-			</prestrain>
+			<k>100</k>
+			<pressure_model>default</pressure_model>
+			<c1>13.85</c1>
+			<c2>0</c2>
+			<c3>2.07</c3>
+			<c4>61.44</c4>
+			<c5>640.7</c5>
+			<lam_max>1.03</lam_max>
+			<fiber type="vector">
+				<vector>0,0,1</vector>
+			</fiber>
 		</material>
 	</Material>
 	<Mesh>
@@ -20528,32 +20571,349 @@
 			<elem id="15813">375,393,372,3983</elem>
 		</Elements>
 		<Surface name="ZeroDisplacement1">
-			<tri3 id="1">2406,2398,2405</tri3>
+			<tri3 id="1">2398,2405,2406</tri3>
 			<tri3 id="2">2406,2407,2398</tri3>
-			<tri3 id="3">2407,2408,2399</tri3>
+			<tri3 id="3">2399,2407,2408</tri3>
 			<tri3 id="4">2409,2401,2408</tri3>
 			<tri3 id="5">2413,2414,2405</tri3>
-			<tri3 id="6">2414,2415,2406</tri3>
-			<tri3 id="7">2415,2416,2407</tri3>
-			<tri3 id="8">2417,2409,2416</tri3>
-			<tri3 id="9">2421,2422,2413</tri3>
-			<tri3 id="10">2422,2423,2414</tri3>
-			<tri3 id="11">2424,2416,2423</tri3>
-			<tri3 id="12">2430,2431,2422</tri3>
+			<tri3 id="6">2415,2406,2414</tri3>
+			<tri3 id="7">2416,2407,2415</tri3>
+			<tri3 id="8">2409,2416,2417</tri3>
+			<tri3 id="9">2422,2413,2421</tri3>
+			<tri3 id="10">2423,2414,2422</tri3>
+			<tri3 id="11">2416,2423,2424</tri3>
+			<tri3 id="12">2422,2430,2431</tri3>
 			<tri3 id="13">2398,2407,2399</tri3>
-			<tri3 id="14">2399,2408,2400</tri3>
-			<tri3 id="15">2408,2401,2400</tri3>
-			<tri3 id="16">2405,2414,2406</tri3>
+			<tri3 id="14">2400,2399,2408</tri3>
+			<tri3 id="15">2401,2400,2408</tri3>
+			<tri3 id="16">2406,2405,2414</tri3>
 			<tri3 id="17">2406,2415,2407</tri3>
 			<tri3 id="18">2407,2416,2408</tri3>
-			<tri3 id="19">2416,2409,2408</tri3>
-			<tri3 id="20">2413,2422,2414</tri3>
-			<tri3 id="21">2414,2423,2415</tri3>
+			<tri3 id="19">2409,2408,2416</tri3>
+			<tri3 id="20">2422,2414,2413</tri3>
+			<tri3 id="21">2423,2415,2414</tri3>
 			<tri3 id="22">2423,2416,2415</tri3>
 			<tri3 id="23">2424,2417,2416</tri3>
-			<tri3 id="24">2421,2430,2422</tri3>
-			<tri3 id="25">2422,2431,2423</tri3>
+			<tri3 id="24">2430,2422,2421</tri3>
+			<tri3 id="25">2423,2422,2431</tri3>
 			<tri3 id="26">2431,2424,2423</tri3>
+		</Surface>
+		<Surface name="PrescribedDisplacement2">
+			<tri3 id="1">1314,1306,1305</tri3>
+			<tri3 id="2">1803,1787,1788</tri3>
+			<tri3 id="3">1297,1298,1287</tri3>
+			<tri3 id="4">1778,1767,1781</tri3>
+			<tri3 id="5">77,101,99</tri3>
+			<tri3 id="6">93,100,94</tri3>
+			<tri3 id="7">93,94,95</tri3>
+			<tri3 id="8">1321,1324,1323</tri3>
+			<tri3 id="9">1812,1825,1803</tri3>
+			<tri3 id="10">1298,1297,1307</tri3>
+			<tri3 id="11">1305,1317,1314</tri3>
+			<tri3 id="12">1746,103,1747</tri3>
+			<tri3 id="13">104,103,1746</tri3>
+			<tri3 id="14">1826,1827,1837</tri3>
+			<tri3 id="15">1248,1245,94</tri3>
+			<tri3 id="16">1245,95,94</tri3>
+			<tri3 id="17">1771,1785,1280</tri3>
+			<tri3 id="18">1271,1284,1282</tri3>
+			<tri3 id="19">1288,1276,1289</tri3>
+			<tri3 id="20">1263,1250,1261</tri3>
+			<tri3 id="21">1821,1810,1822</tri3>
+			<tri3 id="22">1310,1307,1299</tri3>
+			<tri3 id="23">1835,1838,1836</tri3>
+			<tri3 id="24">1800,1809,1290</tri3>
+			<tri3 id="25">1316,1319,2695</tri3>
+			<tri3 id="26">1835,1826,1837</tri3>
+			<tri3 id="27">1805,1789,1793</tri3>
+			<tri3 id="28">97,1245,2</tri3>
+			<tri3 id="29">1765,1779,1766</tri3>
+			<tri3 id="30">1257,1253,1255</tri3>
+			<tri3 id="31">99,93,73</tri3>
+			<tri3 id="32">1792,1806,1805</tri3>
+			<tri3 id="33">1801,1785,1786</tri3>
+			<tri3 id="34">1790,1793,1789</tri3>
+			<tri3 id="35">1790,1789,1775</tri3>
+			<tri3 id="36">2,1245,1247</tri3>
+			<tri3 id="37">1759,1760,1776</tri3>
+			<tri3 id="38">1791,1790,1778</tri3>
+			<tri3 id="39">1774,1763,1764</tri3>
+			<tri3 id="40">1751,1764,1762</tri3>
+			<tri3 id="41">1833,1322,1819</tri3>
+			<tri3 id="42">1775,1777,1790</tri3>
+			<tri3 id="43">1759,1776,1773</tri3>
+			<tri3 id="44">1774,1775,1760</tri3>
+			<tri3 id="45">1772,1786,1771</tri3>
+			<tri3 id="46">1278,1279,1290</tri3>
+			<tri3 id="47">1307,1309,1308</tri3>
+			<tri3 id="48">103,104,102</tri3>
+			<tri3 id="49">1755,1754,1743</tri3>
+			<tri3 id="50">1755,1756,1754</tri3>
+			<tri3 id="51">1812,1805,1815</tri3>
+			<tri3 id="52">110,1751,108</tri3>
+			<tri3 id="53">1265,1276,1277</tri3>
+			<tri3 id="54">1265,1277,1264</tri3>
+			<tri3 id="55">1264,1262,1261</tri3>
+			<tri3 id="56">1262,1263,1261</tri3>
+			<tri3 id="57">1759,1749,1760</tri3>
+			<tri3 id="58">93,99,100</tri3>
+			<tri3 id="59">99,101,100</tri3>
+			<tri3 id="60">82,105,102</tri3>
+			<tri3 id="61">1800,1279,1785</tri3>
+			<tri3 id="62">108,1751,107</tri3>
+			<tri3 id="63">1762,107,1751</tri3>
+			<tri3 id="64">96,93,95</tri3>
+			<tri3 id="65">1747,103,106</tri3>
+			<tri3 id="66">103,102,106</tri3>
+			<tri3 id="67">1748,1750,1749</tri3>
+			<tri3 id="68">105,106,102</tri3>
+			<tri3 id="69">1748,1749,106</tri3>
+			<tri3 id="70">1748,106,105</tri3>
+			<tri3 id="71">1747,106,1749</tri3>
+			<tri3 id="72">1765,1751,110</tri3>
+			<tri3 id="73">1309,1310,1311</tri3>
+			<tri3 id="74">82,77,79</tri3>
+			<tri3 id="75">1258,1246,1248</tri3>
+			<tri3 id="76">1766,1779,1778</tri3>
+			<tri3 id="77">105,107,1748</tri3>
+			<tri3 id="78">1750,1748,107</tri3>
+			<tri3 id="79">1242,2,1247</tri3>
+			<tri3 id="80">1263,1259,1250</tri3>
+			<tri3 id="81">1286,1297,1287</tri3>
+			<tri3 id="82">1267,1278,1276</tri3>
+			<tri3 id="83">1773,1788,1787</tri3>
+			<tri3 id="84">1262,1275,1268</tri3>
+			<tri3 id="85">1268,1263,1262</tri3>
+			<tri3 id="86">1285,1298,1295</tri3>
+			<tri3 id="87">1268,1275,1287</tri3>
+			<tri3 id="88">1296,1291,1282</tri3>
+			<tri3 id="89">1263,1270,1259</tri3>
+			<tri3 id="90">1263,1268,1269</tri3>
+			<tri3 id="91">1285,1284,1268</tri3>
+			<tri3 id="92">1284,1269,1268</tri3>
+			<tri3 id="93">1287,1298,1285</tri3>
+			<tri3 id="94">1268,1287,1285</tri3>
+			<tri3 id="95">1267,1258,1266</tri3>
+			<tri3 id="96">1246,1256,1253</tri3>
+			<tri3 id="97">1271,1270,1269</tri3>
+			<tri3 id="98">1765,110,1752</tri3>
+			<tri3 id="99">1815,1829,1812</tri3>
+			<tri3 id="100">1263,1269,1270</tri3>
+			<tri3 id="101">1803,1811,1802</tri3>
+			<tri3 id="102">1744,1757,1755</tri3>
+			<tri3 id="103">1832,1323,1324</tri3>
+			<tri3 id="104">1275,1264,1277</tri3>
+			<tri3 id="105">1836,2703,1834</tri3>
+			<tri3 id="106">1267,1265,1256</tri3>
+			<tri3 id="107">1766,1778,1790</tri3>
+			<tri3 id="108">1315,1306,1314</tri3>
+			<tri3 id="109">1750,1760,1749</tri3>
+			<tri3 id="110">86,87,85</tri3>
+			<tri3 id="111">82,85,87</tri3>
+			<tri3 id="112">101,1746,1745</tri3>
+			<tri3 id="113">1792,1791,1794</tri3>
+			<tri3 id="114">1278,1289,1276</tri3>
+			<tri3 id="115">1792,1793,1791</tri3>
+			<tri3 id="116">1289,1299,1288</tri3>
+			<tri3 id="117">1311,1819,1322</tri3>
+			<tri3 id="118">1315,1318,1319</tri3>
+			<tri3 id="119">1791,1781,1794</tri3>
+			<tri3 id="120">1308,1298,1307</tri3>
+			<tri3 id="121">107,105,108</tri3>
+			<tri3 id="122">82,79,83</tri3>
+			<tri3 id="123">1756,1757,1771</tri3>
+			<tri3 id="124">1310,1309,1307</tri3>
+			<tri3 id="125">1245,97,95</tri3>
+			<tri3 id="126">2700,2704,2701</tri3>
+			<tri3 id="127">1745,1744,1743</tri3>
+			<tri3 id="128">1772,1787,1786</tri3>
+			<tri3 id="129">2699,1319,2701</tri3>
+			<tri3 id="130">1255,1261,1250</tri3>
+			<tri3 id="131">1823,1835,1834</tri3>
+			<tri3 id="132">1773,1758,1761</tri3>
+			<tri3 id="133">1323,1834,2703</tri3>
+			<tri3 id="134">1324,1322,1832</tri3>
+			<tri3 id="135">1315,1314,1318</tri3>
+			<tri3 id="136">77,99,78</tri3>
+			<tri3 id="137">1829,1827,1828</tri3>
+			<tri3 id="138">1284,1271,1269</tri3>
+			<tri3 id="139">1763,1750,1762</tri3>
+			<tri3 id="140">1750,1763,1760</tri3>
+			<tri3 id="141">1305,1298,1308</tri3>
+			<tri3 id="142">105,109,108</tri3>
+			<tri3 id="143">1754,1280,1266</tri3>
+			<tri3 id="144">1258,1754,1266</tri3>
+			<tri3 id="145">1275,1286,1287</tri3>
+			<tri3 id="146">1282,1291,1281</tri3>
+			<tri3 id="147">1288,1286,1277</tri3>
+			<tri3 id="148">109,105,87</tri3>
+			<tri3 id="149">1301,1292,1291</tri3>
+			<tri3 id="150">1803,1802,1787</tri3>
+			<tri3 id="151">1270,1271,1272</tri3>
+			<tri3 id="152">1779,1765,1767</tri3>
+			<tri3 id="153">1292,1281,1291</tri3>
+			<tri3 id="154">1295,1284,1285</tri3>
+			<tri3 id="155">1319,2700,2701</tri3>
+			<tri3 id="156">1278,1290,1289</tri3>
+			<tri3 id="157">1781,1791,1778</tri3>
+			<tri3 id="158">1812,1824,1825</tri3>
+			<tri3 id="159">1762,1750,107</tri3>
+			<tri3 id="160">1809,1820,1819</tri3>
+			<tri3 id="161">1315,1319,1316</tri3>
+			<tri3 id="162">99,73,78</tri3>
+			<tri3 id="163">2699,2695,1319</tri3>
+			<tri3 id="164">1320,1318,1317</tri3>
+			<tri3 id="165">1789,1805,1804</tri3>
+			<tri3 id="166">1832,1823,1834</tri3>
+			<tri3 id="167">1765,1766,1751</tri3>
+			<tri3 id="168">1267,1256,1258</tri3>
+			<tri3 id="169">1803,1788,1804</tri3>
+			<tri3 id="170">1759,1773,1761</tri3>
+			<tri3 id="171">1253,1256,1254</tri3>
+			<tri3 id="172">1257,1242,1247</tri3>
+			<tri3 id="173">1298,1305,1295</tri3>
+			<tri3 id="174">1761,1746,1747</tri3>
+			<tri3 id="175">2703,2700,1320</tri3>
+			<tri3 id="176">1757,1772,1771</tri3>
+			<tri3 id="177">1278,1266,1279</tri3>
+			<tri3 id="178">1751,1766,1764</tri3>
+			<tri3 id="179">1824,1826,1822</tri3>
+			<tri3 id="180">1821,1820,1810</tri3>
+			<tri3 id="181">1318,2700,1319</tri3>
+			<tri3 id="182">1810,1800,1801</tri3>
+			<tri3 id="183">1318,1314,1317</tri3>
+			<tri3 id="184">1291,1306,1301</tri3>
+			<tri3 id="185">1745,100,101</tri3>
+			<tri3 id="186">1262,1264,1275</tri3>
+			<tri3 id="187">1292,1301,1302</tri3>
+			<tri3 id="188">1819,1820,1833</tri3>
+			<tri3 id="189">1813,1805,1806</tri3>
+			<tri3 id="190">105,82,87</tri3>
+			<tri3 id="191">1763,1774,1760</tri3>
+			<tri3 id="192">1821,1823,1832</tri3>
+			<tri3 id="193">1759,1761,1747</tri3>
+			<tri3 id="194">110,108,109</tri3>
+			<tri3 id="195">1756,1771,1280</tri3>
+			<tri3 id="196">1257,1247,1253</tri3>
+			<tri3 id="197">1312,1316,2695</tri3>
+			<tri3 id="198">1246,1247,1245</tri3>
+			<tri3 id="199">1299,1297,1286</tri3>
+			<tri3 id="200">1289,1300,1299</tri3>
+			<tri3 id="201">1297,1299,1307</tri3>
+			<tri3 id="202">1833,1821,1832</tri3>
+			<tri3 id="203">1254,1261,1255</tri3>
+			<tri3 id="204">1305,1296,1295</tri3>
+			<tri3 id="205">1318,1320,2700</tri3>
+			<tri3 id="206">1832,1322,1833</tri3>
+			<tri3 id="207">1815,1805,1813</tri3>
+			<tri3 id="208">1828,1826,1824</tri3>
+			<tri3 id="209">1321,1323,1320</tri3>
+			<tri3 id="210">1277,1286,1275</tri3>
+			<tri3 id="211">1754,1248,1743</tri3>
+			<tri3 id="212">1282,1284,1296</tri3>
+			<tri3 id="213">1279,1280,1785</tri3>
+			<tri3 id="214">1812,1803,1804</tri3>
+			<tri3 id="215">1812,1828,1824</tri3>
+			<tri3 id="216">1810,1802,1811</tri3>
+			<tri3 id="217">1759,1747,1749</tri3>
+			<tri3 id="218">96,95,97</tri3>
+			<tri3 id="219">1824,1822,1811</tri3>
+			<tri3 id="220">1258,1256,1246</tri3>
+			<tri3 id="221">1745,1743,100</tri3>
+			<tri3 id="222">1776,1775,1789</tri3>
+			<tri3 id="223">1776,1789,1788</tri3>
+			<tri3 id="224">77,78,79</tri3>
+			<tri3 id="225">94,100,1743</tri3>
+			<tri3 id="226">1746,1758,1745</tri3>
+			<tri3 id="227">1248,94,1743</tri3>
+			<tri3 id="228">1280,1279,1266</tri3>
+			<tri3 id="229">1772,1757,1758</tri3>
+			<tri3 id="230">1812,1829,1828</tri3>
+			<tri3 id="231">1756,1755,1757</tri3>
+			<tri3 id="232">1763,1762,1764</tri3>
+			<tri3 id="233">1301,1315,1316</tri3>
+			<tri3 id="234">1278,1267,1266</tri3>
+			<tri3 id="235">1827,1826,1828</tri3>
+			<tri3 id="236">1789,1804,1788</tri3>
+			<tri3 id="237">1320,1317,1321</tri3>
+			<tri3 id="238">1786,1802,1801</tri3>
+			<tri3 id="239">1246,1245,1248</tri3>
+			<tri3 id="240">1744,1745,1758</tri3>
+			<tri3 id="241">1317,1305,1308</tri3>
+			<tri3 id="242">1809,1300,1290</tri3>
+			<tri3 id="243">1312,2695,2696</tri3>
+			<tri3 id="244">1758,1757,1744</tri3>
+			<tri3 id="245">1755,1743,1744</tri3>
+			<tri3 id="246">1793,1792,1805</tri3>
+			<tri3 id="247">1264,1254,1265</tri3>
+			<tri3 id="248">1802,1810,1801</tri3>
+			<tri3 id="249">1810,1820,1800</tri3>
+			<tri3 id="250">1761,1758,1746</tri3>
+			<tri3 id="251">1280,1754,1756</tri3>
+			<tri3 id="252">1793,1790,1791</tri3>
+			<tri3 id="253">1773,1787,1772</tri3>
+			<tri3 id="254">1776,1760,1775</tri3>
+			<tri3 id="255">101,77,104</tri3>
+			<tri3 id="256">1764,1766,1777</tri3>
+			<tri3 id="257">1305,1306,1296</tri3>
+			<tri3 id="258">1265,1254,1256</tri3>
+			<tri3 id="259">1299,1286,1288</tri3>
+			<tri3 id="260">1819,1300,1809</tri3>
+			<tri3 id="261">1774,1764,1777</tri3>
+			<tri3 id="262">1765,1752,1767</tri3>
+			<tri3 id="263">1315,1301,1306</tri3>
+			<tri3 id="264">1299,1300,1310</tri3>
+			<tri3 id="265">1785,1771,1786</tri3>
+			<tri3 id="266">1252,1257,1255</tri3>
+			<tri3 id="267">1801,1800,1785</tri3>
+			<tri3 id="268">1837,1838,1835</tri3>
+			<tri3 id="269">1820,1821,1833</tri3>
+			<tri3 id="270">1309,1311,1322</tri3>
+			<tri3 id="271">1267,1276,1265</tri3>
+			<tri3 id="272">86,109,87</tri3>
+			<tri3 id="273">1322,1324,1321</tri3>
+			<tri3 id="274">1246,1253,1247</tri3>
+			<tri3 id="275">1767,1778,1779</tri3>
+			<tri3 id="276">1323,2703,1320</tri3>
+			<tri3 id="277">1809,1800,1820</tri3>
+			<tri3 id="278">1290,1300,1289</tri3>
+			<tri3 id="279">1775,1774,1777</tri3>
+			<tri3 id="280">1252,1255,1250</tri3>
+			<tri3 id="281">1823,1821,1822</tri3>
+			<tri3 id="282">1823,1822,1826</tri3>
+			<tri3 id="283">1802,1786,1787</tri3>
+			<tri3 id="284">1826,1835,1823</tri3>
+			<tri3 id="285">1811,1803,1825</tri3>
+			<tri3 id="286">1788,1773,1776</tri3>
+			<tri3 id="287">83,85,82</tri3>
+			<tri3 id="288">1279,1800,1290</tri3>
+			<tri3 id="289">1300,1819,1311</tri3>
+			<tri3 id="290">1323,1832,1834</tri3>
+			<tri3 id="291">1805,1812,1804</tri3>
+			<tri3 id="292">1308,1309,1317</tri3>
+			<tri3 id="293">1309,1321,1317</tri3>
+			<tri3 id="294">1284,1295,1296</tri3>
+			<tri3 id="295">1309,1322,1321</tri3>
+			<tri3 id="296">1301,1312,1302</tri3>
+			<tri3 id="297">1271,1281,1272</tri3>
+			<tri3 id="298">1824,1811,1825</tri3>
+			<tri3 id="299">1300,1311,1310</tri3>
+			<tri3 id="300">1277,1276,1288</tri3>
+			<tri3 id="301">1811,1822,1810</tri3>
+			<tri3 id="302">1772,1758,1773</tri3>
+			<tri3 id="303">1834,1835,1836</tri3>
+			<tri3 id="304">1281,1271,1282</tri3>
+			<tri3 id="305">102,77,82</tri3>
+			<tri3 id="306">1777,1766,1790</tri3>
+			<tri3 id="307">73,93,96</tri3>
+			<tri3 id="308">1255,1253,1254</tri3>
+			<tri3 id="309">101,104,1746</tri3>
+			<tri3 id="310">1264,1261,1254</tri3>
+			<tri3 id="311">102,104,77</tri3>
+			<tri3 id="312">1312,1301,1316</tri3>
+			<tri3 id="313">1306,1291,1296</tri3>
+			<tri3 id="314">1754,1258,1248</tri3>
+			<tri3 id="315">2704,2700,2703</tri3>
 		</Surface>
 	</Mesh>
 	<MeshDomains>
@@ -20565,26 +20925,19 @@
 			<y_dof>1</y_dof>
 			<z_dof>1</z_dof>
 		</bc>
+		<bc name="PrescribedDisplacement2" node_set="@surface:PrescribedDisplacement2" type="prescribed displacement">
+			<dof>z</dof>
+			<value lc="1">1</value>
+			<relative>0</relative>
+		</bc>
 	</Boundary>
 	<LoadData>
-		<load_controller id="1" name="Prestrain_LC" type="loadcurve">
+		<load_controller id="1" name="LC2" type="loadcurve">
 			<interpolate>LINEAR</interpolate>
 			<extend>CONSTANT</extend>
 			<points>
 				<pt>0,0</pt>
 				<pt>1,1</pt>
-				<pt>31,1</pt>
-			</points>
-		</load_controller>
-
-		<load_controller id="2" name="Contraction_LC" type="loadcurve">
-			<interpolate>LINEAR</interpolate>
-			<extend>CONSTANT</extend>
-			<points>
-				<pt>0,0</pt>
-				<pt>1,0</pt>
-				<pt>11,1</pt>
-				<pt>31,1</pt>
 			</points>
 		</load_controller>
 	</LoadData>
@@ -20593,103 +20946,7 @@
 			<var type="displacement"/>
 			<var type="stress"/>
 			<var type="relative volume"/>
+			<var type="fiber stretch"/>
 		</plotfile>
-		<logfile>
-			<node_data data="uz" file="Results/biceps_prestrain_disp.txt" nodes="1773"/>
-			<element_data data="sz" file="Results/biceps_prestrain_stress.txt" elements="12457"/>
-			<element_data data="J" file="Results/biceps_prestrain_vol.txt" elements="12457"/>			
-		</logfile>
 	</Output>
-	<Step>
-		<step id="1" name="Prestrain_Equilibration">
-			<Control>
-				<analysis>STATIC</analysis>
-				<time_steps>10</time_steps>
-				<step_size>0.1</step_size>
-				<plot_level>PLOT_NEVER</plot_level>
-				<output_level>OUTPUT_NEVER</output_level>
-				<solver type="solid">
-					<symmetric_stiffness>symmetric</symmetric_stiffness>
-					<equation_scheme>staggered</equation_scheme>
-					<equation_order>default</equation_order>
-					<optimize_bw>0</optimize_bw>
-					<lstol>0.9</lstol>
-					<lsmin>0.01</lsmin>
-					<lsiter>5</lsiter>
-					<max_refs>15</max_refs>
-					<check_zero_diagonal>0</check_zero_diagonal>
-					<zero_diagonal_tol>0</zero_diagonal_tol>
-					<force_partition>0</force_partition>
-					<reform_each_time_step>1</reform_each_time_step>
-					<reform_augment>0</reform_augment>
-					<diverge_reform>1</diverge_reform>
-					<min_residual>1e-20</min_residual>
-					<max_residual>0</max_residual>
-					<dtol>0.001</dtol>
-					<etol>0.01</etol>
-					<rtol>0</rtol>
-					<alpha>1</alpha>
-					<beta>0.25</beta>
-					<gamma>0.5</gamma>
-					<logSolve>0</logSolve>
-					<arc_length>0</arc_length>
-					<arc_length_scale>0</arc_length_scale>
-					<qn_method type="BFGS">
-						<max_ups>10</max_ups>
-						<max_buffer_size>0</max_buffer_size>
-						<cycle_buffer>1</cycle_buffer>
-						<cmax>100000</cmax>
-					</qn_method>
-				</solver>
-			</Control>
-		</step>
-
-		<step id="2" name="Contraction">
-			<Control>
-				<analysis>DYNAMIC</analysis>
-				<time_steps>300</time_steps>
-				<step_size>0.1</step_size>
-				<plot_zero_state>0</plot_zero_state>
-				<plot_range>0,-1</plot_range>
-				<plot_level>PLOT_MAJOR_ITRS</plot_level>
-				<output_level>OUTPUT_MAJOR_ITRS</output_level>
-				<plot_stride>1</plot_stride>
-				<adaptor_re_solve>1</adaptor_re_solve>
-				<solver type="solid">
-					<symmetric_stiffness>symmetric</symmetric_stiffness>
-					<equation_scheme>staggered</equation_scheme>
-					<equation_order>default</equation_order>
-					<optimize_bw>0</optimize_bw>
-					<lstol>0.9</lstol>
-					<lsmin>0.01</lsmin>
-					<lsiter>5</lsiter>
-					<max_refs>15</max_refs>
-					<check_zero_diagonal>0</check_zero_diagonal>
-					<zero_diagonal_tol>0</zero_diagonal_tol>
-					<force_partition>0</force_partition>
-					<reform_each_time_step>1</reform_each_time_step>
-					<reform_augment>0</reform_augment>
-					<diverge_reform>1</diverge_reform>
-					<min_residual>1e-20</min_residual>
-					<max_residual>0</max_residual>
-					<dtol>0.001</dtol>
-					<etol>0.01</etol>
-					<rtol>0</rtol>
-					<rhoi>-2</rhoi>
-					<alpha>1</alpha>
-					<beta>0.25</beta>
-					<gamma>0.5</gamma>
-					<logSolve>0</logSolve>
-					<arc_length>0</arc_length>
-					<arc_length_scale>0</arc_length_scale>
-					<qn_method type="BFGS">
-						<max_ups>10</max_ups>
-						<max_buffer_size>0</max_buffer_size>
-						<cycle_buffer>1</cycle_buffer>
-						<cmax>100000</cmax>
-					</qn_method>
-				</solver>
-			</Control>
-		</step>
-	</Step>
 </febio_spec>

@@ -4,37 +4,81 @@ This directory contains the FEBio input models and reference cases for implement
 
 ---
 
-## Main Simulation Files
+## Directory Architecture
 
-## Main Simulation Files
-
-* **`biceps-muscle-contraction.feb`**
-    * The baseline model file used as the primary reference.
-* **`biceps-muscle-contraction_ps01.feb`**
-    * An initial pre-strain test case of the biceps model, built using the configuration reference from `forum_samples/ps01.feb`. In this version, only **20 elements at the free end of the muscle** are selected to have pre-stretch applied.
-* **`biceps-muscle-contraction_ps01_static.feb`**
-    * A variant of the 20-element pre-stretch configuration that runs **only the static analysis step** without any subsequent active contraction.
-* **`biceps-muscle-contraction_ps01_static-active.feb`**
-    * An extension of the static variant; it includes the exact same localized static analysis setup but adds a follow-up step to simulate **active contraction**.
-* **`biceps-muscle-contraction-prestrain.feb`**
-    * A multi-step version of the baseline file. It splits the simulation into two distinct sequential steps:
-        1. **Step 1:** Applies the pre-strain.
-        2. **Step 2:** Activates the muscle contraction.
+* `biceps/` - Biceps model test cases, comparisons, scripts, and two-step workflows.
+* `ellipsoid/` - Ellipsoid geometry test cases, prestrain scripts, and workflows.
+* `forum_samples/` - FEBio forum reference sample models.
 
 ---
 
-## Troubleshooting & Debugging
+## Biceps Model Workflow (`biceps/`)
 
-* **`biceps-muscle-contraction-prestrain_negjacob.feb`**
-    * A version of the multi-step baseline model preserved for debugging. Running this file triggers **negative Jacobian errors** immediately during the first time step.
+### Main Model Files
+
+* **`biceps-muscle-contraction.feb`**
+    * Baseline model file used as the primary reference.
+* **`biceps_ps01_static_loc.feb`**
+    * A variant of the 20-element pre-stretch configuration that runs **only the static analysis step** without any subsequent active contraction.
+* **`biceps_ps01_ac_static_loc.feb`**
+    * An extension of the static variant; includes the exact same localized static analysis setup but adds a follow-up step to simulate **active contraction**.
+* **`biceps_ps01_ac_static.feb`**
+    * Uses a **static solver** with active contraction, applying a uniform pre-stretch of `1.05` across **all elements** of the model (instead of 20 elements).
+* **`bicep_ps01_ac_dynamic.feb`**
+    * Identical to `biceps_ps01_ac_static.feb` but uses a **dynamic solver** instead of static.
+
+### Subdirectories in `biceps/`
+
+* **`Comparision/`**
+    * Designed to verify whether FEBio's native prestrain feature is mechanically active and actually produces displacement. Contains validation models (`biceps_A_*` vs `biceps_B_*` controls), node displacement diff CSVs, and a `jobs/` subfolder storing simulation run output files. For detailed methodology and benchmark results, see [Comparision.md](biceps/Comparision/Comparision.md).
+* **`two_step/`**
+    * Implements a two-step prestrain workflow: step 1 simulates an initial muscle pull to extract element-wise `fiber_stretch` values, which are then intended for injection as input into FEBio's native prestrain feature (currently at initial pull stage).
+        * **`bicep_initalpull.feb`**: Pulls the muscle by a prescribed distance using the **prescribed displacement** option.
+        * **`bicep_initalpull_rigid_constraint.feb`**: Pulls the muscle using a **rigid constraint** option instead of prescribed displacement.
+        * **`jobs/`**: Stores simulation run output files.
+* **`scripts/`**
+    * Contains `compare_disp.py` — a PyVista-based node-displacement diff tool used for node-for-node displacement comparisons across matched-mesh VTK exports (detailed in [Comparision.md](biceps/Comparision/Comparision.md)).
+* **`jobs/`**
+    * Stores simulation run output files.
+
+---
+
+## Ellipsoid Model Workflow (`ellipsoid/`)
+
+### Main Model Files
+
+* **`ellipsoid-muscle-contraction.feb`**
+    * Baseline model file used as the primary reference for the ellipsoid geometry.
+* **`ellipsoid_ps01_ac_static.feb`**
+    * Configured with a static solver and active contraction, applying a uniform pre-stretch of `1.05` across all elements of the ellipsoid geometry model.
+
+### Subdirectories in `ellipsoid/`
+
+* **`script/`**
+    * **`fill_prestrain.py`**: Bulk-fills placeholder `<e lid="N">0</e>` values inside a `.feb` file's `<ElementData>` block with a uniform stretch value (default `1.05`), generating a `*_filled.feb` model file.
+    * **`diff_prestrain.py`**: Compares an original `.feb` file against a filled version to summarize element-wise value changes and verify no unintended modifications occurred elsewhere.
+* **`two_step/`**
+    * Implements a complete two-step initial pull & prestrain extraction/injection workflow:
+        * **`ellipsoid_initialpull.feb`**: Simulates the initial muscle pull step.
+        * **`ellipsoid_prestrain.feb`**: Prestrain model template with `<ElementData>` pre-configured, where element stretch values default to `0`.
+        * **`ellipsoid_prestrain_ready.feb`**: Ready-to-run model generated by injecting extracted stretch values from the initial pull into `ellipsoid_prestrain.feb`.
+        * **`script/`**:
+            * **`extract_stretch.py`**: Parses `jobs/stretch_values.txt` (generated during initial pull) to extract final-step element stretch values into `jobs/final_stretch_values.csv`.
+            * **`inject_prestrain.py`**: Injects `jobs/final_stretch_values.csv` into `ellipsoid_prestrain.feb`, replacing default `0` placeholders to create `ellipsoid_prestrain_ready.feb`.
+        * **`jobs/`**:
+            * **`stretch_values.txt`**: Raw stretch output generated directly during the initial pull simulation run.
+            * **`final_stretch_values.csv`**: Processed element-wise stretch values extracted by `extract_stretch.py`.
+            * Stores simulation run output files.
+* **`jobs/`**
+    * Stores simulation run output files.
 
 ---
 
 ## Forum Reference Samples
 
-The `forum_samples/` directory contains four distinct reference example cases explicitly addressing pre-strain implementations, sourced directly from the FEBio forum community for benchmarking and troubleshooting:
+The `forum_samples/` directory contains reference example cases explicitly addressing pre-strain implementations, sourced directly from the FEBio forum community for benchmarking and setup patterns:
 
-* **`ps01.feb`** (Used as the direct basis for `biceps-muscle-contraction_ps01.feb`)
+* **`ps01.feb`** (Basis for initial prestrain element configuration patterns)
 * **`ps02.feb`**
 * **`ps03.feb`**
 * **`ps04.feb`**
