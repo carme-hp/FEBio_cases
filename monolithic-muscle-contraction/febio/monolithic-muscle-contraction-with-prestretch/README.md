@@ -35,7 +35,7 @@ This directory contains the FEBio input models and reference cases for implement
     * Implements a two-step prestrain workflow: step 1 simulates an initial muscle pull to extract element-wise `fiber_stretch` values, which are then intended for injection as input into FEBio's native prestrain feature (currently at initial pull stage).
         * **`bicep_initalpull.feb`**: Pulls the muscle by a prescribed distance using the **prescribed displacement** option.
         * **`bicep_initalpull_rigid_constraint.feb`**: Pulls the muscle using a **rigid constraint** option instead of prescribed displacement.
-        * **`jobs/`**: Stores simulation run output files.
+        * **`jobs/`**: Stores simulation run output files and exported VTK time series.
 * **`scripts/`**
     * Contains `compare_disp.py` — a PyVista-based node-displacement diff tool used for node-for-node displacement comparisons across matched-mesh VTK exports (detailed in [Comparision.md](biceps/Comparision/Comparision.md)).
 * **`jobs/`**
@@ -69,6 +69,16 @@ This directory contains the FEBio input models and reference cases for implement
             * **`stretch_values.txt`**: Raw stretch output generated directly during the initial pull simulation run.
             * **`final_stretch_values.csv`**: Processed element-wise stretch values extracted by `extract_stretch.py`.
             * Stores simulation run output files.
+        * **`V&V/`** (Verification & Validation):
+            * Contains validation cases and benchmarking suites for testing time discretization, prestrain timing, and stress field responses:
+                * **`ellipsoid_initialpull_15.feb`**: Initial pull variant evaluated over a 15-second ramp.
+                * **`ellipsoid_initialpull_30.feb`**: Initial pull variant evaluated over a 30-second ramp.
+                * **`scripts/`**:
+                    * **`check_prestrain_timing.py`**: Evaluates temporal synchronization across prestrain initialization and active contraction stages.
+                    * **`validate_timestep.py`**: Validates time-stepping sensitivity and convergence behavior.
+                    * **`validate_prestrain_stress.py`**: Evaluates internal stress states under prestrain loading conditions.
+                    * **`test_hypothesis_t1.py`**: Tests displacement and equilibrium response at initial time step $t_1$.
+                * **`jobs/`**: Stores solver logs, binary `.xplt` outputs, raw stretch logs (`stretch_values_15.txt`, `stretch_values_30.txt`), and VTK time series (`VTK_files/`).
 * **`jobs/`**
     * Stores simulation run output files.
 
