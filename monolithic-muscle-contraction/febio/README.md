@@ -9,14 +9,15 @@ The models housed here simulate dynamic, active muscle contraction under physiol
 
 ## Directory Inventory
 
-| File / Folder | Type | Description |
+This directory includes FEBio input files for multiple muscles, as well as a `surface_data/` subfolder. An overview of all the available muscle can be found in the table below.
+
+| File | Type | Muscle |
 | :--- | :--- | :--- |
-| **`geometry_and_mesh_details/`** | Directory | Asset library containing raw shapes (`.stl`) and detailed volumetric meshing specifications. |
-| **`cylinder-muscle-contraction.feb`** | FEBio Input | Idealized cylindrical model used to verify the dynamic active contraction pipeline. |
-| **`cuboid-muscle-contraction.feb`** | FEBio Input | Idealized rectangular prism reference case demonstrating directional contraction. |
-| **`ellipsoid-muscle-contraction.feb`** | FEBio Input | Idealized spindle-shaped reference case tracking non-uniform contraction. |
-| **`biceps-muscle-contraction.feb`** | FEBio Input | Reference model showcasing contraction on a realistic biceps geometry. |
-| **`TA-muscle-contraction.feb`** | FEBio Input | Biological Tibialis Anterior model showcasing contraction on a realistic muscle geometry. |
+| **`cylinder-muscle-contraction.feb`** | FEBio Input | Idealized cylindrical muscle. |
+| **`cuboid-muscle-contraction.feb`** | FEBio Input | Idealized cuboid muscle. |
+| **`ellipsoid-muscle-contraction.feb`** | FEBio Input | Idealized fusiform muscle. |
+| **`biceps-muscle-contraction.feb`** | FEBio Input | Biceps |
+| **`TA-muscle-contraction.feb`** | FEBio Input | Tibialis Anterior |
 
 ---
 
@@ -40,7 +41,7 @@ To maintain a clean repository structure and eliminate descriptive redundancy, a
 To execute any of these simulation files locally via the FEBio command-line interface, ensure your terminal is inside this directory and call the solver using the standard input flag format shown below.
 
 ```bash
-febio4 -i cylinder_Activecontraction.feb
+febio4 -i cylinder-muscle-contraction.feb
 ```
 
-Note: The command below uses cylinder_Activecontraction.feb as a baseline example. It can be replaced with any of the other .feb files listed in the directory inventory to run their respective simulations.
+Note: The command below uses cylinder-muscle-contraction.feb as a baseline example. It can be replaced with any of the other .feb files listed in the directory inventory to run their respective simulations.
