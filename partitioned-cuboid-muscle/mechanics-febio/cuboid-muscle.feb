@@ -67,7 +67,7 @@
 		</Constants>
 	</Globals>
 	<Material>
-		<material id="1" name="Material2" type="DiHuMaterial">
+		<material id="1" name="Material2" type="GammaMaterial">
 			<density>10</density>
 			<k>1000</k>
 			<pressure_model>default</pressure_model>
@@ -80,7 +80,7 @@
 			<fiber type="vector">
 				<vector>0,0,1</vector>
 			</fiber>
-			<active_contraction type="DiHuContraction">
+			<active_contraction type="GammaContraction">
 				<pmax>7.3</pmax>
 				<lam_opt>1.2</lam_opt>
 				<enable_force_length_relation>1</enable_force_length_relation>
