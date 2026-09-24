@@ -1,0 +1,21 @@
+# Ignore Windows Zone.Identifier files created in WSL
+*Zone.Identifier
+*:Zone.Identifier
+
+# FEBio Studio and plot output files
+*.fsm
+*.xplt
+*.vtk
+*.VTK
+*.vtu
+*vtk.series
+*.series
+
+# Simulation jobs and results directories
+jobs/
+**/jobs/**
+
+# Output logs and extracted data files
+*.log
+*.txt
+*.csv
