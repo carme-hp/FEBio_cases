@@ -86,9 +86,12 @@ This directory contains the FEBio input models and reference cases for implement
 
 ## Forum Reference Samples
 
-The `forum_samples/` directory contains reference example cases explicitly addressing pre-strain implementations, sourced directly from the FEBio forum community for benchmarking and setup patterns:
+The `forum_samples/` directory contains reference benchmark models explicitly addressing pre-strain implementations in FEBio:
 
-* **`ps01.feb`** (Basis for initial prestrain element configuration patterns)
-* **`ps02.feb`**
-* **`ps03.feb`**
-* **`ps04.feb`**
+* **Source Forum Reference:** [Prestrain examples (tutorials for FEBio 3)](https://forums.febio.org/forum/febio-forums/examples-and-tutorials-ab/tutorials/18942-prestrain-examples-tutorials-for-febio-3)
+* **Origin & Context:** Provided by FEBio developer Steve Maas (sourced from the official FEBio nightly test suite) to illustrate the correct specification syntax for prestrain materials and initial constraints in FEBio 3.0 (`spec="3.0"`).
+* **Reference Models Included:**
+  * **`ps01.feb`**: Implementation of `in-situ stretch` prestrain (`<prestrain type="in-situ stretch">`) applied to a `coupled trans-iso Mooney-Rivlin` material with an element-wise scalar stretch distribution (`<ElementData name="pre_stretch" elem_set="Part1">`). This serves as the primary syntactic template for element data injection across our prestrain workflows.
+  * **`ps02.feb`**: Companion benchmark for `in-situ stretch` evaluating alternate constraint settings.
+  * **`ps03.feb`**: Implementation of `prestrain gradient` (`<prestrain type="prestrain gradient">`) utilizing an element-wise deformation gradient tensor field (`<ElementData name="F0_map" datatype="mat3">`).
+  * **`ps04.feb`**: Companion benchmark for the `prestrain gradient` framework under altered boundary/loading configurations.**
